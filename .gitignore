@@ -5,6 +5,8 @@
 *.egg-info
 *.pth
 *.pkl
+*.ckpt.*
+*.ckpt
 *.pb
 *.h5
 *.pbtxt
