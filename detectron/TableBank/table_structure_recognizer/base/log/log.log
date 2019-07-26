@@ -1,0 +1,903 @@
+[2019-07-19 16:50:25,052 @cfgs.py:124] ERROR: invalid score threshold, please check SHOW_SCORE_THRSHOLD again...
+[2019-07-19 16:50:25,111 @register_detectors.py:61] INFO: Environment Information:
+--------------------  -------------------------------------------------------------------
+sys.platform          linux
+Python                3.6.8 |Anaconda, Inc.| (default, Dec 30 2018, 01:22:34) [GCC 7.3.0]
+Numpy                 1.16.2
+TensorFlow            1.13.1/b'v1.13.1-0-g6612da8951'
+TF Compiler Version   4.8.5
+TF CUDA support       True
+TF MKL support        False
+Nvidia Driver         /usr/lib/x86_64-linux-gnu/libnvidia-ml.so.430.26
+CUDA                  /home/yons/anaconda3/envs/tensorflow-gpu/lib/libcudart.so.10.0.130
+CUDNN                 /home/yons/anaconda3/envs/tensorflow-gpu/lib/libcudnn.so.7.6.0
+NCCL
+CUDA_VISIBLE_DEVICES  None
+GPU 0,1               GeForce GTX 1080 Ti
+Free RAM              37.97/62.85 GB
+CPU Count             16
+cv2                   4.1.0
+msgpack               0.6.1
+python-prctl          False
+--------------------  -------------------------------------------------------------------
+[2019-07-19 16:50:25,111 @register_detectors.py:62] ERROR: invalid score threshold, please check SHOW_SCORE_THRSHOLD again...
+Traceback (most recent call last):
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/detectors/register_detectors.py", line 57, in register_detectors
+    finalize_configs(logger)
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/configs/cfgs.py", line 158, in finalize_configs
+    _log_errors(logger, error_message=error_message, error_type=ValueError)
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/configs/cfgs.py", line 125, in _log_errors
+    raise error_type(error_message)
+ValueError: invalid score threshold, please check SHOW_SCORE_THRSHOLD again...
+[2019-07-19 16:51:15,879 @cfgs.py:164] INFO: System Configuration: 
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+ROOT_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base
+TEST_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_images
+TEST_RESULT          /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_result
+TEST_ANNO            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_annotations
+LOG_PATH             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log
+LOG_FILE             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log/log.log
+DETECTOR             TENSORPACK
+RUNNING_MODE         local
+SERVER_MODE          GRPC
+GRPC_SERVER_URL      localhost:9000
+REST_SERVER_URL      http://localhost:9001/v1/models/HelmetDetector:predict
+SNIPER_SERVER_URL    http://localhost:9002/helmetdetector
+GPU_MODE             0
+GPU_MEMORY_FRACTION  0.5
+NUM_CLASSES          3
+VERSION              cascade_tensorpack_models
+FROZEN_MODEL         /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/models/cascade_tensorpack_models/Cascade_FPN_Res101_tensorpack_Helmet.pb
+INPUT_SIZE           1024
+NMS_THRESHOLD        None
+DATASET_NAME         helmet
+SHOW_SCORE_THRSHOLD  0.1
+SKIP_DISPLAY         person
+SKIP_SCORES          False
+VISUALIZATION        True
+DATA                 {'VAL': {}}
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+[2019-07-19 16:53:39,966 @cfgs.py:164] INFO: System Configuration: 
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+ROOT_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base
+TEST_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_images
+TEST_RESULT          /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_result
+TEST_ANNO            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_annotations
+LOG_PATH             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log
+LOG_FILE             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log/log.log
+DETECTOR             TENSORPACK
+RUNNING_MODE         local
+SERVER_MODE          GRPC
+GRPC_SERVER_URL      localhost:9000
+REST_SERVER_URL      http://localhost:9001/v1/models/HelmetDetector:predict
+SNIPER_SERVER_URL    http://localhost:9002/helmetdetector
+GPU_MODE             0
+GPU_MEMORY_FRACTION  0.5
+NUM_CLASSES          3
+VERSION              cascade_tensorpack_models
+FROZEN_MODEL         /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/models/cascade_tensorpack_models/Cascade_FPN_Res101_tensorpack_Helmet.pb
+INPUT_SIZE           1024
+NMS_THRESHOLD        None
+DATASET_NAME         helmet
+SHOW_SCORE_THRSHOLD  0.3
+SKIP_DISPLAY         person
+SKIP_SCORES          False
+VISUALIZATION        True
+DATA                 {'VAL': {}}
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+[2019-07-19 16:54:56,009 @cfgs.py:164] INFO: System Configuration: 
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+ROOT_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base
+TEST_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_images
+TEST_RESULT          /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_result
+TEST_ANNO            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_annotations
+LOG_PATH             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log
+LOG_FILE             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log/log.log
+DETECTOR             TENSORPACK
+RUNNING_MODE         local
+SERVER_MODE          GRPC
+GRPC_SERVER_URL      localhost:9000
+REST_SERVER_URL      http://localhost:9001/v1/models/HelmetDetector:predict
+SNIPER_SERVER_URL    http://localhost:9002/helmetdetector
+GPU_MODE             0
+GPU_MEMORY_FRACTION  0.5
+NUM_CLASSES          3
+VERSION              cascade_tensorpack_models
+FROZEN_MODEL         /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/models/cascade_tensorpack_models/Cascade_FPN_Res101_tensorpack_Helmet.pb
+INPUT_SIZE           1024
+NMS_THRESHOLD        None
+DATASET_NAME         helmet
+SHOW_SCORE_THRSHOLD  0.4
+SKIP_DISPLAY         person
+SKIP_SCORES          False
+VISUALIZATION        True
+DATA                 {'VAL': {}}
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+[2019-07-19 16:56:42,700 @cfgs.py:164] INFO: System Configuration: 
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+ROOT_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base
+TEST_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_images
+TEST_RESULT          /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_result
+TEST_ANNO            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_annotations
+LOG_PATH             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log
+LOG_FILE             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log/log.log
+DETECTOR             TENSORPACK
+RUNNING_MODE         local
+SERVER_MODE          GRPC
+GRPC_SERVER_URL      localhost:9000
+REST_SERVER_URL      http://localhost:9001/v1/models/HelmetDetector:predict
+SNIPER_SERVER_URL    http://localhost:9002/helmetdetector
+GPU_MODE             0
+GPU_MEMORY_FRACTION  0.5
+NUM_CLASSES          3
+VERSION              cascade_tensorpack_models
+FROZEN_MODEL         /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/models/cascade_tensorpack_models/Cascade_FPN_Res101_tensorpack_Helmet.pb
+INPUT_SIZE           1024
+NMS_THRESHOLD        None
+DATASET_NAME         helmet
+SHOW_SCORE_THRSHOLD  0.4
+SKIP_DISPLAY         person
+SKIP_SCORES          False
+VISUALIZATION        True
+DATA                 {'VAL': {}}
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+[2019-07-19 16:58:44,404 @cfgs.py:164] INFO: System Configuration: 
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+ROOT_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base
+TEST_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_images
+TEST_RESULT          /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_result
+TEST_ANNO            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_annotations
+LOG_PATH             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log
+LOG_FILE             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log/log.log
+DETECTOR             TENSORPACK
+RUNNING_MODE         local
+SERVER_MODE          GRPC
+GRPC_SERVER_URL      localhost:9000
+REST_SERVER_URL      http://localhost:9001/v1/models/HelmetDetector:predict
+SNIPER_SERVER_URL    http://localhost:9002/helmetdetector
+GPU_MODE             0
+GPU_MEMORY_FRACTION  0.5
+NUM_CLASSES          3
+VERSION              cascade_tensorpack_models
+FROZEN_MODEL         /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/models/cascade_tensorpack_models/Cascade_FPN_Res101_tensorpack_Helmet.pb
+INPUT_SIZE           1024
+NMS_THRESHOLD        None
+DATASET_NAME         helmet
+SHOW_SCORE_THRSHOLD  0.3
+SKIP_DISPLAY         person
+SKIP_SCORES          False
+VISUALIZATION        True
+DATA                 {'VAL': {}}
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+[2019-07-19 16:59:38,839 @cfgs.py:164] INFO: System Configuration: 
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+ROOT_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base
+TEST_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_images
+TEST_RESULT          /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_result
+TEST_ANNO            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_annotations
+LOG_PATH             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log
+LOG_FILE             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log/log.log
+DETECTOR             TENSORPACK
+RUNNING_MODE         local
+SERVER_MODE          GRPC
+GRPC_SERVER_URL      localhost:9000
+REST_SERVER_URL      http://localhost:9001/v1/models/HelmetDetector:predict
+SNIPER_SERVER_URL    http://localhost:9002/helmetdetector
+GPU_MODE             0
+GPU_MEMORY_FRACTION  0.5
+NUM_CLASSES          3
+VERSION              cascade_tensorpack_models
+FROZEN_MODEL         /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/models/cascade_tensorpack_models/Cascade_FPN_Res101_tensorpack_Helmet.pb
+INPUT_SIZE           1024
+NMS_THRESHOLD        None
+DATASET_NAME         helmet
+SHOW_SCORE_THRSHOLD  0.1
+SKIP_DISPLAY         person
+SKIP_SCORES          False
+VISUALIZATION        True
+DATA                 {'VAL': {}}
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+[2019-07-19 17:01:13,458 @cfgs.py:164] INFO: System Configuration: 
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+ROOT_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base
+TEST_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_images
+TEST_RESULT          /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_result
+TEST_ANNO            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_annotations
+LOG_PATH             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log
+LOG_FILE             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log/log.log
+DETECTOR             TENSORPACK
+RUNNING_MODE         local
+SERVER_MODE          GRPC
+GRPC_SERVER_URL      localhost:9000
+REST_SERVER_URL      http://localhost:9001/v1/models/HelmetDetector:predict
+SNIPER_SERVER_URL    http://localhost:9002/helmetdetector
+GPU_MODE             0
+GPU_MEMORY_FRACTION  0.5
+NUM_CLASSES          3
+VERSION              cascade_tensorpack_models
+FROZEN_MODEL         /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/models/cascade_tensorpack_models/Cascade_FPN_Res101_tensorpack_Helmet.pb
+INPUT_SIZE           608
+NMS_THRESHOLD        None
+DATASET_NAME         helmet
+SHOW_SCORE_THRSHOLD  0.1
+SKIP_DISPLAY         person
+SKIP_SCORES          False
+VISUALIZATION        True
+DATA                 {'VAL': {}}
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+[2019-07-19 17:01:59,663 @cfgs.py:164] INFO: System Configuration: 
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+ROOT_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base
+TEST_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_images
+TEST_RESULT          /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_result
+TEST_ANNO            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_annotations
+LOG_PATH             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log
+LOG_FILE             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log/log.log
+DETECTOR             TENSORPACK
+RUNNING_MODE         local
+SERVER_MODE          GRPC
+GRPC_SERVER_URL      localhost:9000
+REST_SERVER_URL      http://localhost:9001/v1/models/HelmetDetector:predict
+SNIPER_SERVER_URL    http://localhost:9002/helmetdetector
+GPU_MODE             0
+GPU_MEMORY_FRACTION  0.5
+NUM_CLASSES          3
+VERSION              cascade_tensorpack_models
+FROZEN_MODEL         /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/models/cascade_tensorpack_models/Cascade_FPN_Res101_tensorpack_Helmet.pb
+INPUT_SIZE           1080
+NMS_THRESHOLD        None
+DATASET_NAME         helmet
+SHOW_SCORE_THRSHOLD  0.1
+SKIP_DISPLAY         person
+SKIP_SCORES          False
+VISUALIZATION        True
+DATA                 {'VAL': {}}
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+[2019-07-19 17:05:59,302 @cfgs.py:164] INFO: System Configuration: 
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+ROOT_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base
+TEST_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_images
+TEST_RESULT          /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_result
+TEST_ANNO            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_annotations
+LOG_PATH             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log
+LOG_FILE             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log/log.log
+DETECTOR             TENSORPACK
+RUNNING_MODE         local
+SERVER_MODE          GRPC
+GRPC_SERVER_URL      localhost:9000
+REST_SERVER_URL      http://localhost:9001/v1/models/HelmetDetector:predict
+SNIPER_SERVER_URL    http://localhost:9002/helmetdetector
+GPU_MODE             0
+GPU_MEMORY_FRACTION  0.5
+NUM_CLASSES          3
+VERSION              cascade_tensorpack_models
+FROZEN_MODEL         /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/models/cascade_tensorpack_models/Cascade_FPN_Res101_tensorpack_Helmet.pb
+INPUT_SIZE           [1080, 720]
+NMS_THRESHOLD        None
+DATASET_NAME         helmet
+SHOW_SCORE_THRSHOLD  0.1
+SKIP_DISPLAY         person
+SKIP_SCORES          False
+VISUALIZATION        True
+DATA                 {'VAL': {}}
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+[2019-07-19 17:07:42,578 @cfgs.py:164] INFO: System Configuration: 
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+ROOT_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base
+TEST_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_images
+TEST_RESULT          /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_result
+TEST_ANNO            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_annotations
+LOG_PATH             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log
+LOG_FILE             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log/log.log
+DETECTOR             TENSORPACK
+RUNNING_MODE         local
+SERVER_MODE          GRPC
+GRPC_SERVER_URL      localhost:9000
+REST_SERVER_URL      http://localhost:9001/v1/models/HelmetDetector:predict
+SNIPER_SERVER_URL    http://localhost:9002/helmetdetector
+GPU_MODE             0
+GPU_MEMORY_FRACTION  0.5
+NUM_CLASSES          3
+VERSION              cascade_tensorpack_models
+FROZEN_MODEL         /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/models/cascade_tensorpack_models/Cascade_FPN_Res101_tensorpack_Helmet.pb
+INPUT_SIZE           [1024, 1024]
+NMS_THRESHOLD        None
+DATASET_NAME         helmet
+SHOW_SCORE_THRSHOLD  0.1
+SKIP_DISPLAY         person
+SKIP_SCORES          False
+VISUALIZATION        True
+DATA                 {'VAL': {}}
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+[2019-07-19 17:09:40,042 @cfgs.py:164] INFO: System Configuration: 
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+ROOT_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base
+TEST_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_images
+TEST_RESULT          /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_result
+TEST_ANNO            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_annotations
+LOG_PATH             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log
+LOG_FILE             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log/log.log
+DETECTOR             TENSORPACK
+RUNNING_MODE         local
+SERVER_MODE          GRPC
+GRPC_SERVER_URL      localhost:9000
+REST_SERVER_URL      http://localhost:9001/v1/models/HelmetDetector:predict
+SNIPER_SERVER_URL    http://localhost:9002/helmetdetector
+GPU_MODE             0
+GPU_MEMORY_FRACTION  0.5
+NUM_CLASSES          3
+VERSION              cascade_tensorpack_models
+FROZEN_MODEL         /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/models/cascade_tensorpack_models/Cascade_FPN_Res101_tensorpack_Helmet.pb
+INPUT_SIZE           [1280, 1280]
+NMS_THRESHOLD        None
+DATASET_NAME         helmet
+SHOW_SCORE_THRSHOLD  0.3
+SKIP_DISPLAY         person
+SKIP_SCORES          False
+VISUALIZATION        True
+DATA                 {'VAL': {}}
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+[2019-07-19 17:11:34,974 @cfgs.py:164] INFO: System Configuration: 
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+ROOT_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base
+TEST_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_images
+TEST_RESULT          /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_result
+TEST_ANNO            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_annotations
+LOG_PATH             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log
+LOG_FILE             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log/log.log
+DETECTOR             TENSORPACK
+RUNNING_MODE         local
+SERVER_MODE          GRPC
+GRPC_SERVER_URL      localhost:9000
+REST_SERVER_URL      http://localhost:9001/v1/models/HelmetDetector:predict
+SNIPER_SERVER_URL    http://localhost:9002/helmetdetector
+GPU_MODE             0
+GPU_MEMORY_FRACTION  0.5
+NUM_CLASSES          3
+VERSION              cascade_tensorpack_models
+FROZEN_MODEL         /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/models/cascade_tensorpack_models/Cascade_FPN_Res101_tensorpack_Helmet.pb
+INPUT_SIZE           [1600, 1600]
+NMS_THRESHOLD        None
+DATASET_NAME         helmet
+SHOW_SCORE_THRSHOLD  0.3
+SKIP_DISPLAY         person
+SKIP_SCORES          False
+VISUALIZATION        True
+DATA                 {'VAL': {}}
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+[2019-07-19 17:11:43,489 @object_detector.py:26] INFO: Environment Information:
+--------------------  -------------------------------------------------------------------
+sys.platform          linux
+Python                3.6.8 |Anaconda, Inc.| (default, Dec 30 2018, 01:22:34) [GCC 7.3.0]
+Numpy                 1.16.2
+TensorFlow            1.13.1/b'v1.13.1-0-g6612da8951'
+TF Compiler Version   4.8.5
+TF CUDA support       True
+TF MKL support        False
+Nvidia Driver         /usr/lib/x86_64-linux-gnu/libnvidia-ml.so.430.26
+CUDA                  /home/yons/anaconda3/envs/tensorflow-gpu/lib/libcudart.so.10.0.130
+CUDNN                 /home/yons/anaconda3/envs/tensorflow-gpu/lib/libcudnn.so.7.6.0
+NCCL
+CUDA_VISIBLE_DEVICES  0
+GPU 0,1               GeForce GTX 1080 Ti
+Free RAM              35.86/62.85 GB
+CPU Count             16
+cv2                   4.1.0
+msgpack               0.6.1
+python-prctl          False
+--------------------  -------------------------------------------------------------------
+[2019-07-19 17:11:43,490 @object_detector.py:27] ERROR: Expected size[0] in [0, 42], but got 50
+	 [[node FPN_slice_lvl3/narrow_to/Slice (defined at /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/help_utils/tools.py:48) ]]
+	 [[node generate_fpn_proposals/Lvl2/generate_rpn_proposals/boolean_mask_1/GatherV2 (defined at /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/help_utils/tools.py:48) ]]
+
+Caused by op 'FPN_slice_lvl3/narrow_to/Slice', defined at:
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_test.py", line 51, in <module>
+    object_detector = ObjectDetector(mode=cfgs.RUNNING_MODE)
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/src/object_detector.py", line 14, in __init__
+    self.detector = register_detectors(mode)
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/detectors/register_detectors.py", line 59, in register_detectors
+    return Detector(mode=mode)
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/detectors/tensorpack_detector.py", line 10, in __init__
+    super(TensorpackDetector, self).__init__(mode=mode)
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/detectors/base_detector.py", line 31, in __init__
+    self._load_model()
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/detectors/base_detector.py", line 139, in _load_model
+    self.graph = tools.load_graph(self.model_file)
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/help_utils/tools.py", line 48, in load_graph
+    producer_op_list=None)
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/util/deprecation.py", line 507, in new_func
+    return func(*args, **kwargs)
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/framework/importer.py", line 442, in import_graph_def
+    _ProcessNewOps(graph)
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/framework/importer.py", line 235, in _ProcessNewOps
+    for new_op in graph._add_new_tf_operations(compute_devices=False):  # pylint: disable=protected-access
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/framework/ops.py", line 3433, in _add_new_tf_operations
+    for c_op in c_api_util.new_tf_operations(self)
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/framework/ops.py", line 3433, in <listcomp>
+    for c_op in c_api_util.new_tf_operations(self)
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/framework/ops.py", line 3325, in _create_op_from_tf_operation
+    ret = Operation(c_op, self)
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/framework/ops.py", line 1801, in __init__
+    self._traceback = tf_stack.extract_stack()
+
+InvalidArgumentError (see above for traceback): Expected size[0] in [0, 42], but got 50
+	 [[node FPN_slice_lvl3/narrow_to/Slice (defined at /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/help_utils/tools.py:48) ]]
+	 [[node generate_fpn_proposals/Lvl2/generate_rpn_proposals/boolean_mask_1/GatherV2 (defined at /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/help_utils/tools.py:48) ]]
+Traceback (most recent call last):
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/client/session.py", line 1334, in _do_call
+    return fn(*args)
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/client/session.py", line 1319, in _run_fn
+    options, feed_dict, fetch_list, target_list, run_metadata)
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/client/session.py", line 1407, in _call_tf_sessionrun
+    run_metadata)
+tensorflow.python.framework.errors_impl.InvalidArgumentError: Expected size[0] in [0, 42], but got 50
+	 [[{{node FPN_slice_lvl3/narrow_to/Slice}}]]
+	 [[{{node generate_fpn_proposals/Lvl2/generate_rpn_proposals/boolean_mask_1/GatherV2}}]]
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/src/object_detector.py", line 23, in objects_detect
+    res = self.detector.objects_detect(*image_list, test=test)
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/detectors/base_detector.py", line 182, in objects_detect
+    image_id, img_np, res_list = self._detect_helmet(file_path)
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/detectors/base_detector.py", line 218, in _detect_helmet
+    img_np, parse_res_list = self._inference(frame)
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/detectors/base_detector.py", line 232, in _inference
+    dets_val = self._run_inference_local(image_np)
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/detectors/tensorpack_detector.py", line 80, in _run_inference_local
+    feed_dict={self.input_img: input_data})
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/client/session.py", line 929, in run
+    run_metadata_ptr)
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/client/session.py", line 1152, in _run
+    feed_dict_tensor, options, run_metadata)
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/client/session.py", line 1328, in _do_run
+    run_metadata)
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/client/session.py", line 1348, in _do_call
+    raise type(e)(node_def, op, message)
+tensorflow.python.framework.errors_impl.InvalidArgumentError: Expected size[0] in [0, 42], but got 50
+	 [[node FPN_slice_lvl3/narrow_to/Slice (defined at /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/help_utils/tools.py:48) ]]
+	 [[node generate_fpn_proposals/Lvl2/generate_rpn_proposals/boolean_mask_1/GatherV2 (defined at /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/help_utils/tools.py:48) ]]
+
+Caused by op 'FPN_slice_lvl3/narrow_to/Slice', defined at:
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_test.py", line 51, in <module>
+    object_detector = ObjectDetector(mode=cfgs.RUNNING_MODE)
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/src/object_detector.py", line 14, in __init__
+    self.detector = register_detectors(mode)
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/detectors/register_detectors.py", line 59, in register_detectors
+    return Detector(mode=mode)
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/detectors/tensorpack_detector.py", line 10, in __init__
+    super(TensorpackDetector, self).__init__(mode=mode)
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/detectors/base_detector.py", line 31, in __init__
+    self._load_model()
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/detectors/base_detector.py", line 139, in _load_model
+    self.graph = tools.load_graph(self.model_file)
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/help_utils/tools.py", line 48, in load_graph
+    producer_op_list=None)
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/util/deprecation.py", line 507, in new_func
+    return func(*args, **kwargs)
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/framework/importer.py", line 442, in import_graph_def
+    _ProcessNewOps(graph)
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/framework/importer.py", line 235, in _ProcessNewOps
+    for new_op in graph._add_new_tf_operations(compute_devices=False):  # pylint: disable=protected-access
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/framework/ops.py", line 3433, in _add_new_tf_operations
+    for c_op in c_api_util.new_tf_operations(self)
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/framework/ops.py", line 3433, in <listcomp>
+    for c_op in c_api_util.new_tf_operations(self)
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/framework/ops.py", line 3325, in _create_op_from_tf_operation
+    ret = Operation(c_op, self)
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/framework/ops.py", line 1801, in __init__
+    self._traceback = tf_stack.extract_stack()
+
+InvalidArgumentError (see above for traceback): Expected size[0] in [0, 42], but got 50
+	 [[node FPN_slice_lvl3/narrow_to/Slice (defined at /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/help_utils/tools.py:48) ]]
+	 [[node generate_fpn_proposals/Lvl2/generate_rpn_proposals/boolean_mask_1/GatherV2 (defined at /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/help_utils/tools.py:48) ]]
+
+[2019-07-19 17:12:02,565 @cfgs.py:164] INFO: System Configuration: 
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+ROOT_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base
+TEST_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_images
+TEST_RESULT          /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_result
+TEST_ANNO            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_annotations
+LOG_PATH             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log
+LOG_FILE             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log/log.log
+DETECTOR             TENSORPACK
+RUNNING_MODE         local
+SERVER_MODE          GRPC
+GRPC_SERVER_URL      localhost:9000
+REST_SERVER_URL      http://localhost:9001/v1/models/HelmetDetector:predict
+SNIPER_SERVER_URL    http://localhost:9002/helmetdetector
+GPU_MODE             0
+GPU_MEMORY_FRACTION  0.5
+NUM_CLASSES          3
+VERSION              cascade_tensorpack_models
+FROZEN_MODEL         /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/models/cascade_tensorpack_models/Cascade_FPN_Res101_tensorpack_Helmet.pb
+INPUT_SIZE           [1024, 1024]
+NMS_THRESHOLD        None
+DATASET_NAME         helmet
+SHOW_SCORE_THRSHOLD  0.3
+SKIP_DISPLAY         person
+SKIP_SCORES          False
+VISUALIZATION        True
+DATA                 {'VAL': {}}
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+[2019-07-19 17:12:52,571 @cfgs.py:164] INFO: System Configuration: 
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+ROOT_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base
+TEST_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_images2
+TEST_RESULT          /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_result
+TEST_ANNO            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_annotations
+LOG_PATH             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log
+LOG_FILE             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log/log.log
+DETECTOR             TENSORPACK
+RUNNING_MODE         local
+SERVER_MODE          GRPC
+GRPC_SERVER_URL      localhost:9000
+REST_SERVER_URL      http://localhost:9001/v1/models/HelmetDetector:predict
+SNIPER_SERVER_URL    http://localhost:9002/helmetdetector
+GPU_MODE             0
+GPU_MEMORY_FRACTION  0.5
+NUM_CLASSES          3
+VERSION              cascade_tensorpack_models
+FROZEN_MODEL         /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/models/cascade_tensorpack_models/Cascade_FPN_Res101_tensorpack_Helmet.pb
+INPUT_SIZE           [1024, 1024]
+NMS_THRESHOLD        None
+DATASET_NAME         helmet
+SHOW_SCORE_THRSHOLD  0.3
+SKIP_DISPLAY         person
+SKIP_SCORES          False
+VISUALIZATION        True
+DATA                 {'VAL': {}}
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+[2019-07-19 17:12:58,277 @cfgs.py:164] INFO: System Configuration: 
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+ROOT_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base
+TEST_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_images2
+TEST_RESULT          /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_result
+TEST_ANNO            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_annotations
+LOG_PATH             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log
+LOG_FILE             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log/log.log
+DETECTOR             TENSORPACK
+RUNNING_MODE         local
+SERVER_MODE          GRPC
+GRPC_SERVER_URL      localhost:9000
+REST_SERVER_URL      http://localhost:9001/v1/models/HelmetDetector:predict
+SNIPER_SERVER_URL    http://localhost:9002/helmetdetector
+GPU_MODE             0
+GPU_MEMORY_FRACTION  0.5
+NUM_CLASSES          3
+VERSION              cascade_tensorpack_models
+FROZEN_MODEL         /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/models/cascade_tensorpack_models/Cascade_FPN_Res101_tensorpack_Helmet.pb
+INPUT_SIZE           [1024, 1024]
+NMS_THRESHOLD        None
+DATASET_NAME         helmet
+SHOW_SCORE_THRSHOLD  0.3
+SKIP_DISPLAY         person
+SKIP_SCORES          False
+VISUALIZATION        True
+DATA                 {'VAL': {}}
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+[2019-07-19 17:13:49,124 @cfgs.py:164] INFO: System Configuration: 
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+ROOT_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base
+TEST_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_images2
+TEST_RESULT          /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_result
+TEST_ANNO            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_annotations
+LOG_PATH             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log
+LOG_FILE             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log/log.log
+DETECTOR             TENSORPACK
+RUNNING_MODE         local
+SERVER_MODE          GRPC
+GRPC_SERVER_URL      localhost:9000
+REST_SERVER_URL      http://localhost:9001/v1/models/HelmetDetector:predict
+SNIPER_SERVER_URL    http://localhost:9002/helmetdetector
+GPU_MODE             0
+GPU_MEMORY_FRACTION  0.5
+NUM_CLASSES          3
+VERSION              cascade_tensorpack_models
+FROZEN_MODEL         /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/models/cascade_tensorpack_models/Cascade_FPN_Res101_tensorpack_Helmet.pb
+INPUT_SIZE           [720, 1080]
+NMS_THRESHOLD        None
+DATASET_NAME         helmet
+SHOW_SCORE_THRSHOLD  0.3
+SKIP_DISPLAY         person
+SKIP_SCORES          False
+VISUALIZATION        True
+DATA                 {'VAL': {}}
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+[2019-07-19 17:16:01,824 @cfgs.py:164] INFO: System Configuration: 
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+ROOT_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base
+TEST_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_images
+TEST_RESULT          /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_result
+TEST_ANNO            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_annotations
+LOG_PATH             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log
+LOG_FILE             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log/log.log
+DETECTOR             TENSORPACK
+RUNNING_MODE         local
+SERVER_MODE          GRPC
+GRPC_SERVER_URL      localhost:9000
+REST_SERVER_URL      http://localhost:9001/v1/models/HelmetDetector:predict
+SNIPER_SERVER_URL    http://localhost:9002/helmetdetector
+GPU_MODE             0
+GPU_MEMORY_FRACTION  0.5
+NUM_CLASSES          3
+VERSION              cascade_tensorpack_models
+FROZEN_MODEL         /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/models/cascade_tensorpack_models/Cascade_FPN_Res101_tensorpack_Helmet.pb
+INPUT_SIZE           [720, 1080]
+NMS_THRESHOLD        None
+DATASET_NAME         helmet
+SHOW_SCORE_THRSHOLD  0.3
+SKIP_DISPLAY         person
+SKIP_SCORES          False
+VISUALIZATION        True
+DATA                 {'VAL': {}}
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+[2019-07-19 17:17:03,504 @cfgs.py:164] INFO: System Configuration: 
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+ROOT_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base
+TEST_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_images
+TEST_RESULT          /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_result
+TEST_ANNO            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_annotations
+LOG_PATH             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log
+LOG_FILE             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log/log.log
+DETECTOR             TENSORPACK
+RUNNING_MODE         local
+SERVER_MODE          GRPC
+GRPC_SERVER_URL      localhost:9000
+REST_SERVER_URL      http://localhost:9001/v1/models/HelmetDetector:predict
+SNIPER_SERVER_URL    http://localhost:9002/helmetdetector
+GPU_MODE             0
+GPU_MEMORY_FRACTION  0.5
+NUM_CLASSES          3
+VERSION              cascade_tensorpack_models
+FROZEN_MODEL         /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/models/cascade_tensorpack_models/Cascade_FPN_Res101_tensorpack_Helmet.pb
+INPUT_SIZE           [1440, 2160]
+NMS_THRESHOLD        None
+DATASET_NAME         helmet
+SHOW_SCORE_THRSHOLD  0.3
+SKIP_DISPLAY         person
+SKIP_SCORES          False
+VISUALIZATION        True
+DATA                 {'VAL': {}}
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+[2019-07-19 17:17:12,472 @object_detector.py:26] INFO: Environment Information:
+--------------------  -------------------------------------------------------------------
+sys.platform          linux
+Python                3.6.8 |Anaconda, Inc.| (default, Dec 30 2018, 01:22:34) [GCC 7.3.0]
+Numpy                 1.16.2
+TensorFlow            1.13.1/b'v1.13.1-0-g6612da8951'
+TF Compiler Version   4.8.5
+TF CUDA support       True
+TF MKL support        False
+Nvidia Driver         /usr/lib/x86_64-linux-gnu/libnvidia-ml.so.430.26
+CUDA                  /home/yons/anaconda3/envs/tensorflow-gpu/lib/libcudart.so.10.0.130
+CUDNN                 /home/yons/anaconda3/envs/tensorflow-gpu/lib/libcudnn.so.7.6.0
+NCCL
+CUDA_VISIBLE_DEVICES  0
+GPU 0,1               GeForce GTX 1080 Ti
+Free RAM              35.86/62.85 GB
+CPU Count             16
+cv2                   4.1.0
+msgpack               0.6.1
+python-prctl          False
+--------------------  -------------------------------------------------------------------
+[2019-07-19 17:17:12,472 @object_detector.py:27] ERROR: Expected size[0] in [0, 42], but got 45
+	 [[node FPN_slice_lvl3/narrow_to/Slice (defined at /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/help_utils/tools.py:48) ]]
+	 [[node generate_fpn_proposals/Lvl2/generate_rpn_proposals/boolean_mask_1/GatherV2 (defined at /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/help_utils/tools.py:48) ]]
+
+Caused by op 'FPN_slice_lvl3/narrow_to/Slice', defined at:
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_test.py", line 51, in <module>
+    object_detector = ObjectDetector(mode=cfgs.RUNNING_MODE)
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/src/object_detector.py", line 14, in __init__
+    self.detector = register_detectors(mode)
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/detectors/register_detectors.py", line 59, in register_detectors
+    return Detector(mode=mode)
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/detectors/tensorpack_detector.py", line 10, in __init__
+    super(TensorpackDetector, self).__init__(mode=mode)
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/detectors/base_detector.py", line 31, in __init__
+    self._load_model()
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/detectors/base_detector.py", line 139, in _load_model
+    self.graph = tools.load_graph(self.model_file)
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/help_utils/tools.py", line 48, in load_graph
+    producer_op_list=None)
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/util/deprecation.py", line 507, in new_func
+    return func(*args, **kwargs)
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/framework/importer.py", line 442, in import_graph_def
+    _ProcessNewOps(graph)
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/framework/importer.py", line 235, in _ProcessNewOps
+    for new_op in graph._add_new_tf_operations(compute_devices=False):  # pylint: disable=protected-access
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/framework/ops.py", line 3433, in _add_new_tf_operations
+    for c_op in c_api_util.new_tf_operations(self)
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/framework/ops.py", line 3433, in <listcomp>
+    for c_op in c_api_util.new_tf_operations(self)
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/framework/ops.py", line 3325, in _create_op_from_tf_operation
+    ret = Operation(c_op, self)
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/framework/ops.py", line 1801, in __init__
+    self._traceback = tf_stack.extract_stack()
+
+InvalidArgumentError (see above for traceback): Expected size[0] in [0, 42], but got 45
+	 [[node FPN_slice_lvl3/narrow_to/Slice (defined at /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/help_utils/tools.py:48) ]]
+	 [[node generate_fpn_proposals/Lvl2/generate_rpn_proposals/boolean_mask_1/GatherV2 (defined at /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/help_utils/tools.py:48) ]]
+Traceback (most recent call last):
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/client/session.py", line 1334, in _do_call
+    return fn(*args)
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/client/session.py", line 1319, in _run_fn
+    options, feed_dict, fetch_list, target_list, run_metadata)
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/client/session.py", line 1407, in _call_tf_sessionrun
+    run_metadata)
+tensorflow.python.framework.errors_impl.InvalidArgumentError: Expected size[0] in [0, 42], but got 45
+	 [[{{node FPN_slice_lvl3/narrow_to/Slice}}]]
+	 [[{{node generate_fpn_proposals/Lvl2/generate_rpn_proposals/boolean_mask_1/GatherV2}}]]
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/src/object_detector.py", line 23, in objects_detect
+    res = self.detector.objects_detect(*image_list, test=test)
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/detectors/base_detector.py", line 182, in objects_detect
+    image_id, img_np, res_list = self._detect_helmet(file_path)
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/detectors/base_detector.py", line 218, in _detect_helmet
+    img_np, parse_res_list = self._inference(frame)
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/detectors/base_detector.py", line 232, in _inference
+    dets_val = self._run_inference_local(image_np)
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/detectors/tensorpack_detector.py", line 80, in _run_inference_local
+    feed_dict={self.input_img: input_data})
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/client/session.py", line 929, in run
+    run_metadata_ptr)
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/client/session.py", line 1152, in _run
+    feed_dict_tensor, options, run_metadata)
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/client/session.py", line 1328, in _do_run
+    run_metadata)
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/client/session.py", line 1348, in _do_call
+    raise type(e)(node_def, op, message)
+tensorflow.python.framework.errors_impl.InvalidArgumentError: Expected size[0] in [0, 42], but got 45
+	 [[node FPN_slice_lvl3/narrow_to/Slice (defined at /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/help_utils/tools.py:48) ]]
+	 [[node generate_fpn_proposals/Lvl2/generate_rpn_proposals/boolean_mask_1/GatherV2 (defined at /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/help_utils/tools.py:48) ]]
+
+Caused by op 'FPN_slice_lvl3/narrow_to/Slice', defined at:
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_test.py", line 51, in <module>
+    object_detector = ObjectDetector(mode=cfgs.RUNNING_MODE)
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/src/object_detector.py", line 14, in __init__
+    self.detector = register_detectors(mode)
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/detectors/register_detectors.py", line 59, in register_detectors
+    return Detector(mode=mode)
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/detectors/tensorpack_detector.py", line 10, in __init__
+    super(TensorpackDetector, self).__init__(mode=mode)
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/detectors/base_detector.py", line 31, in __init__
+    self._load_model()
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/detectors/base_detector.py", line 139, in _load_model
+    self.graph = tools.load_graph(self.model_file)
+  File "/home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/help_utils/tools.py", line 48, in load_graph
+    producer_op_list=None)
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/util/deprecation.py", line 507, in new_func
+    return func(*args, **kwargs)
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/framework/importer.py", line 442, in import_graph_def
+    _ProcessNewOps(graph)
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/framework/importer.py", line 235, in _ProcessNewOps
+    for new_op in graph._add_new_tf_operations(compute_devices=False):  # pylint: disable=protected-access
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/framework/ops.py", line 3433, in _add_new_tf_operations
+    for c_op in c_api_util.new_tf_operations(self)
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/framework/ops.py", line 3433, in <listcomp>
+    for c_op in c_api_util.new_tf_operations(self)
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/framework/ops.py", line 3325, in _create_op_from_tf_operation
+    ret = Operation(c_op, self)
+  File "/home/yons/anaconda3/envs/tensorflow-gpu/lib/python3.6/site-packages/tensorflow/python/framework/ops.py", line 1801, in __init__
+    self._traceback = tf_stack.extract_stack()
+
+InvalidArgumentError (see above for traceback): Expected size[0] in [0, 42], but got 45
+	 [[node FPN_slice_lvl3/narrow_to/Slice (defined at /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/help_utils/tools.py:48) ]]
+	 [[node generate_fpn_proposals/Lvl2/generate_rpn_proposals/boolean_mask_1/GatherV2 (defined at /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/help_utils/tools.py:48) ]]
+
+[2019-07-19 17:18:37,827 @cfgs.py:164] INFO: System Configuration: 
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+ROOT_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base
+TEST_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_images
+TEST_RESULT          /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_result
+TEST_ANNO            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_annotations
+LOG_PATH             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log
+LOG_FILE             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log/log.log
+DETECTOR             TENSORPACK
+RUNNING_MODE         local
+SERVER_MODE          GRPC
+GRPC_SERVER_URL      localhost:9000
+REST_SERVER_URL      http://localhost:9001/v1/models/HelmetDetector:predict
+SNIPER_SERVER_URL    http://localhost:9002/helmetdetector
+GPU_MODE             0
+GPU_MEMORY_FRACTION  0.5
+NUM_CLASSES          3
+VERSION              cascade_tensorpack_models
+FROZEN_MODEL         /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/models/cascade_tensorpack_models/Cascade_FPN_Res101_tensorpack_Helmet.pb
+INPUT_SIZE           [864, 1296]
+NMS_THRESHOLD        None
+DATASET_NAME         helmet
+SHOW_SCORE_THRSHOLD  0.3
+SKIP_DISPLAY         person
+SKIP_SCORES          False
+VISUALIZATION        True
+DATA                 {'VAL': {}}
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+[2019-07-19 17:19:42,608 @cfgs.py:164] INFO: System Configuration: 
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+ROOT_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base
+TEST_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_images
+TEST_RESULT          /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_result
+TEST_ANNO            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_annotations
+LOG_PATH             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log
+LOG_FILE             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log/log.log
+DETECTOR             TENSORPACK
+RUNNING_MODE         local
+SERVER_MODE          GRPC
+GRPC_SERVER_URL      localhost:9000
+REST_SERVER_URL      http://localhost:9001/v1/models/HelmetDetector:predict
+SNIPER_SERVER_URL    http://localhost:9002/helmetdetector
+GPU_MODE             0
+GPU_MEMORY_FRACTION  0.5
+NUM_CLASSES          3
+VERSION              cascade_tensorpack_models
+FROZEN_MODEL         /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/models/cascade_tensorpack_models/Cascade_FPN_Res101_tensorpack_Helmet.pb
+INPUT_SIZE           [720, 1080]
+NMS_THRESHOLD        None
+DATASET_NAME         helmet
+SHOW_SCORE_THRSHOLD  0.3
+SKIP_DISPLAY         person
+SKIP_SCORES          False
+VISUALIZATION        True
+DATA                 {'VAL': {}}
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+[2019-07-19 17:21:24,920 @cfgs.py:164] INFO: System Configuration: 
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+ROOT_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base
+TEST_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_images
+TEST_RESULT          /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_result
+TEST_ANNO            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_annotations
+LOG_PATH             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log
+LOG_FILE             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log/log.log
+DETECTOR             TENSORPACK
+RUNNING_MODE         local
+SERVER_MODE          GRPC
+GRPC_SERVER_URL      localhost:9000
+REST_SERVER_URL      http://localhost:9001/v1/models/HelmetDetector:predict
+SNIPER_SERVER_URL    http://localhost:9002/helmetdetector
+GPU_MODE             0
+GPU_MEMORY_FRACTION  0.5
+NUM_CLASSES          3
+VERSION              cascade_tensorpack_models
+FROZEN_MODEL         /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/models/cascade_tensorpack_models/Cascade_FPN_Res101_tensorpack_Helmet.pb
+INPUT_SIZE           [720, 1080]
+NMS_THRESHOLD        None
+DATASET_NAME         helmet
+SHOW_SCORE_THRSHOLD  0.3
+SKIP_DISPLAY         person
+SKIP_SCORES          False
+VISUALIZATION        True
+DATA                 {'VAL': {}}
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+[2019-07-19 17:23:38,088 @cfgs.py:164] INFO: System Configuration: 
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+ROOT_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base
+TEST_PATH            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_images
+TEST_RESULT          /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_result
+TEST_ANNO            /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/test/test_annotations
+LOG_PATH             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log
+LOG_FILE             /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/log/log.log
+DETECTOR             TENSORPACK
+RUNNING_MODE         local
+SERVER_MODE          GRPC
+GRPC_SERVER_URL      localhost:9000
+REST_SERVER_URL      http://localhost:9001/v1/models/HelmetDetector:predict
+SNIPER_SERVER_URL    http://localhost:9002/helmetdetector
+GPU_MODE             0
+GPU_MEMORY_FRACTION  0.5
+NUM_CLASSES          3
+VERSION              cascade_tensorpack_models
+FROZEN_MODEL         /home/yons/develop/AI/AI_Server/erowaiserver/aiserver/helmet_detect_utils/base/models/cascade_tensorpack_models/Cascade_FPN_Res101_tensorpack_Helmet.pb
+INPUT_SIZE           [720, 1080]
+NMS_THRESHOLD        None
+DATASET_NAME         helmet
+SHOW_SCORE_THRSHOLD  0.3
+SKIP_DISPLAY         person
+SKIP_SCORES          False
+VISUALIZATION        True
+DATA                 {'VAL': {}}
+-------------------  -------------------------------------------------------------------------------------------------------------------------------------------------------

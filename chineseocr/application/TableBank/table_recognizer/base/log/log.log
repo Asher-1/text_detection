@@ -1,0 +1,97 @@
+[2019-07-25 17:21:01,946 INFO] Translating shard 0.
+[2019-07-25 17:21:02,309 INFO] PRED AVG SCORE: -0.0343, PRED PPL: 1.0349
+[2019-07-25 17:21:02,309 INFO] Total translation time (s): 0.346296
+[2019-07-25 17:21:02,309 INFO] Average translation time (s): 0.057716
+[2019-07-25 17:21:02,309 INFO] Tokens per second: 831.659438
+[2019-07-25 17:21:02,317 INFO] save excel file to /home/yons/develop/AI/text_detection/chineseocr/application/TableBank/tables/res.xlsx
+[2019-07-25 17:21:18,270 INFO] Translating shard 0.
+[2019-07-25 17:21:18,628 INFO] 
+SENT 1: None
+PRED 1: <tabular> <thead> <tr> <tdn> <tdy> </tr> <tr> <tdy> <tdy> <tdy> <tdy> </tr> </thead> <tbody> <tr> <tdy> <tdy> <tdy> <tdy> </tr> <tr> <tdy> <tdy> <tdy> <tdy> </tr> <tr> <tdy> <tdy> <tdy> <tdy> </tr> <tr> <tdn> <tdy> </tr> <tr> <tdy> <tdy> <tdy> <tdy> </tr> <tr> <tdy> <tdy> <tdy> <tdy> </tr> <tr> <tdy> <tdy> <tdy> <tdy> </tr> </tbody> </tabular>
+PRED SCORE: -2.8743
+
+[2019-07-25 17:21:18,628 INFO] 
+SENT 2: None
+PRED 2: <tabular> <thead> <tr> <tdy> <tdy> </tr> <tr> <tdy> <tdn> </tr> </thead> <tbody> <tr> <tdy> <tdy> </tr> <tr> <tdy> <tdn> </tr> <tr> <tdy> <tdy> </tr> <tr> <tdy> <tdy> </tr> <tr> <tdy> <tdn> </tr> <tr> <tdy> <tdy> </tr> <tr> <tdy> <tdy> </tr> <tr> <tdy> <tdy> </tr> <tr> <tdy> <tdy> </tr> </tbody> </tabular>
+PRED SCORE: -2.2055
+
+[2019-07-25 17:21:18,628 INFO] 
+SENT 3: None
+PRED 3: <tabular> <tbody> <tr> <tdy> <tdy> <tdy> </tr> <tr> <tdy> <tdy> <tdy> </tr> <tr> <tdy> <tdy> <tdy> </tr> </tbody> </tabular>
+PRED SCORE: -2.2958
+
+[2019-07-25 17:21:18,628 INFO] 
+SENT 4: None
+PRED 4: <tabular> <tbody> <tr> <tdn> <tdy> <tdy> <tdy> <tdy> <tdy> <tdy> </tr> <tr> <tdy> <tdy> <tdy> <tdy> <tdy> <tdy> <tdy> <tdy> </tr> <tr> <tdy> <tdy> <tdy> <tdy> <tdy> <tdy> <tdy> <tdy> </tr> <tr> <tdy> <tdy> <tdy> <tdy> <tdy> <tdy> <tdy> <tdy> </tr> <tr> <tdy> <tdy> <tdy> <tdy> <tdy> <tdy> <tdy> <tdy> </tr> <tr> <tdy> <tdy> <tdy> <tdy> <tdy> <tdy> <tdy> <tdy> </tr> <tr> <tdy> <tdy> <tdy> <tdy> <tdy> <tdy> <tdy> <tdy> </tr> <tr> <tdy> <tdy> <tdy> <tdy> <tdy> <tdy> <tdy> <tdy> </tr> <tr> <tdy> <tdy> <tdy> <tdy> <tdy> <tdy> <tdy> <tdy> </tr> </tbody> </tabular>
+PRED SCORE: -1.1788
+
+[2019-07-25 17:21:18,628 INFO] 
+SENT 5: None
+PRED 5: <tabular> <thead> <tr> <tdy> <tdy> <tdy> </tr> </thead> <tbody> <tr> <tdy> <tdy> <tdy> </tr> <tr> <tdy> <tdy> <tdy> </tr> <tr> <tdy> <tdy> <tdy> </tr> <tr> <tdy> <tdy> <tdy> </tr> <tr> <tdy> <tdy> <tdy> </tr> </tbody> </tabular>
+PRED SCORE: -0.6097
+
+[2019-07-25 17:21:18,629 INFO] 
+SENT 6: None
+PRED 6: <tabular> <tbody> <tr> <tdy> <tdy> <tdy> <tdy> </tr> <tr> <tdy> <tdy> <tdy> <tdy> </tr> <tr> <tdy> <tdy> <tdy> <tdy> </tr> <tr> <tdy> <tdy> <tdy> <tdy> </tr> <tr> <tdy> <tdy> <tdy> <tdy> </tr> </tbody> </tabular>
+PRED SCORE: -0.7084
+
+[2019-07-25 17:21:18,629 INFO] PRED AVG SCORE: -0.0343, PRED PPL: 1.0349
+[2019-07-25 17:21:18,629 INFO] Total translation time (s): 0.341909
+[2019-07-25 17:21:18,629 INFO] Average translation time (s): 0.056985
+[2019-07-25 17:21:18,629 INFO] Tokens per second: 842.330147
+[2019-07-25 17:21:18,632 INFO] ################################################## start parsing sheet 0 ##################################################
+[2019-07-25 17:21:18,633 INFO] row 0	 col number: 2
+[2019-07-25 17:21:18,633 INFO] row 1	 col number: 4
+[2019-07-25 17:21:18,633 INFO] row 2	 col number: 4
+[2019-07-25 17:21:18,633 INFO] row 3	 col number: 4
+[2019-07-25 17:21:18,633 INFO] row 4	 col number: 4
+[2019-07-25 17:21:18,633 INFO] row 5	 col number: 2
+[2019-07-25 17:21:18,633 INFO] row 6	 col number: 4
+[2019-07-25 17:21:18,633 INFO] row 7	 col number: 4
+[2019-07-25 17:21:18,633 INFO] row 8	 col number: 4
+[2019-07-25 17:21:18,634 INFO] ################################################## start parsing sheet 1 ##################################################
+[2019-07-25 17:21:18,634 INFO] row 0	 col number: 2
+[2019-07-25 17:21:18,634 INFO] row 1	 col number: 2
+[2019-07-25 17:21:18,634 INFO] row 2	 col number: 2
+[2019-07-25 17:21:18,634 INFO] row 3	 col number: 2
+[2019-07-25 17:21:18,634 INFO] row 4	 col number: 2
+[2019-07-25 17:21:18,634 INFO] row 5	 col number: 2
+[2019-07-25 17:21:18,634 INFO] row 6	 col number: 2
+[2019-07-25 17:21:18,634 INFO] row 7	 col number: 2
+[2019-07-25 17:21:18,634 INFO] row 8	 col number: 2
+[2019-07-25 17:21:18,634 INFO] row 9	 col number: 2
+[2019-07-25 17:21:18,634 INFO] row 10	 col number: 2
+[2019-07-25 17:21:18,634 INFO] ################################################## start parsing sheet 2 ##################################################
+[2019-07-25 17:21:18,635 INFO] row 0	 col number: 3
+[2019-07-25 17:21:18,635 INFO] row 1	 col number: 3
+[2019-07-25 17:21:18,635 INFO] row 2	 col number: 3
+[2019-07-25 17:21:18,635 INFO] ################################################## start parsing sheet 3 ##################################################
+[2019-07-25 17:21:18,635 INFO] row 0	 col number: 7
+[2019-07-25 17:21:18,635 INFO] row 1	 col number: 8
+[2019-07-25 17:21:18,635 INFO] row 2	 col number: 8
+[2019-07-25 17:21:18,635 INFO] row 3	 col number: 8
+[2019-07-25 17:21:18,636 INFO] row 4	 col number: 8
+[2019-07-25 17:21:18,636 INFO] row 5	 col number: 8
+[2019-07-25 17:21:18,636 INFO] row 6	 col number: 8
+[2019-07-25 17:21:18,636 INFO] row 7	 col number: 8
+[2019-07-25 17:21:18,636 INFO] row 8	 col number: 8
+[2019-07-25 17:21:18,636 INFO] ################################################## start parsing sheet 4 ##################################################
+[2019-07-25 17:21:18,636 INFO] row 0	 col number: 3
+[2019-07-25 17:21:18,637 INFO] row 1	 col number: 3
+[2019-07-25 17:21:18,637 INFO] row 2	 col number: 3
+[2019-07-25 17:21:18,637 INFO] row 3	 col number: 3
+[2019-07-25 17:21:18,637 INFO] row 4	 col number: 3
+[2019-07-25 17:21:18,637 INFO] row 5	 col number: 3
+[2019-07-25 17:21:18,637 INFO] ################################################## start parsing sheet 5 ##################################################
+[2019-07-25 17:21:18,637 INFO] row 0	 col number: 4
+[2019-07-25 17:21:18,637 INFO] row 1	 col number: 4
+[2019-07-25 17:21:18,637 INFO] row 2	 col number: 4
+[2019-07-25 17:21:18,637 INFO] row 3	 col number: 4
+[2019-07-25 17:21:18,637 INFO] row 4	 col number: 4
+[2019-07-25 17:21:18,639 INFO] save excel file to /home/yons/develop/AI/text_detection/chineseocr/application/TableBank/tables/res.xlsx
+[2019-07-25 17:41:40,659 INFO] Translating shard 0.
+[2019-07-25 17:41:41,014 INFO] PRED AVG SCORE: -0.0343, PRED PPL: 1.0349
+[2019-07-25 17:41:41,014 INFO] Total translation time (s): 0.337907
+[2019-07-25 17:41:41,014 INFO] Average translation time (s): 0.056318
+[2019-07-25 17:41:41,014 INFO] Tokens per second: 852.306527
+[2019-07-25 17:41:41,023 INFO] save excel file to /home/yons/develop/AI/text_detection/chineseocr/application/TableBank/tables/res.xlsx

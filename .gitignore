@@ -1,0 +1,67 @@
+# Python:
+*.py[cod]
+*.so
+*.egg
+*.egg-info
+*.pth
+*.pkl
+*.pb
+*.h5
+*.pbtxt
+*.weights
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+*.pt
+\#*#
+.idea
+*.sublime-*
+.DS_Store
+
+.pytest_cache
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+
+# Temporary files
+*.swn
+*.swo
+*.swp
+*.pb
+*.ckpt
+
+dist
+buil
+.DS_Store*
+.ipynb_checkpoints
+__pycache__
+Anaconda3-2019.03-Linux-x86_64.sh
+
+# mypy
+.mypy_cache/
+
+.DS_Store
+.idea/
+.ipynb_checkpoints

@@ -1,0 +1,16 @@
+# Python:
+*.py[cod]
+*.so
+*.egg
+*.egg-info
+*.pth
+*.pb
+*.h5
+*.pbtxt
+*.weights
+dist
+buil
+.DS_Store*
+.ipynb_checkpoints
+__pycache__
+Anaconda3-2019.03-Linux-x86_64.sh
