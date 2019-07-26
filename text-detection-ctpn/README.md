@@ -40,7 +40,7 @@ python ./utils/prepare/split_label.py
 ```
 - it will generate the prepared data in data/dataset/
 - The input file format demo of split_label.py can be found in [gt_img_859.txt](https://github.com/eragonruan/text-detection-ctpn/blob/banjin-dev/data/readme/gt_img_859.txt). And the output file of split_label.py is [img_859.txt](https://github.com/eragonruan/text-detection-ctpn/blob/banjin-dev/data/readme/img_859.txt). A demo image of the prepared data is shown below.
-<img src="https://github.com/Asher-1/text_detection/edit/master/text-detection-ctpn/data/readme/demo_split.png" width=640 height=480 />
+<img src="https://github.com/Asher-1/text_detection/blob/master/text-detection-ctpn/data/readme/demo_split.png" width=640 height=480 />
 
 ***
 ## train 
@@ -52,12 +52,12 @@ python ./main/train.py
 ***
 # some results
 `NOTICE:` all the photos used below are collected from the internet. If it affects you, please contact me to delete them.
-<img src="https://github.com/Asher-1/text_detection/edit/master/text-detection-ctpn/data/res/006.jpg" width=320 height=480 /><img src="https://github.com/Asher-1/text_detection/edit/master/text-detection-ctpn/data/res/008.jpg" width=320 height=480 />
-<img src="https://github.com/Asher-1/text_detection/edit/master/text-detection-ctpn/data/res/009.jpg" width=320 height=480 /><img src="https://github.com/Asher-1/text_detection/edit/master/text-detection-ctpn/data/res/010.png" width=320 height=320 />
+<img src="https://github.com/Asher-1/text_detection/blob/master/text-detection-ctpn/data/res/006.jpg" width=320 height=480 /><img src="https://github.com/Asher-1/text_detection/blob/master/text-detection-ctpn/data/res/008.jpg" width=320 height=480 />
+<img src="https://github.com/Asher-1/text_detection/blob/master/text-detection-ctpn/data/res/009.jpg" width=320 height=480 /><img src="https://github.com/Asher-1/text_detection/blob/master/text-detection-ctpn/data/res/010.png" width=320 height=320 />
 ***
 ## oriented text connector
 - oriented text connector has been implemented, i's working, but still need futher improvement.
 - left figure is the result for DETECT_MODE H, right figure for DETECT_MODE O
-<img src="https://github.com/Asher-1/text_detection/edit/master/text-detection-ctpn/data/res/007.jpg" width=320 height=240 /><img src="https://github.com/Asher-1/text_detection/edit/master/text-detection-ctpn/data/res_oriented/007.jpg" width=320 height=240 />
-<img src="https://github.com/Asher-1/text_detection/edit/master/text-detection-ctpn/data/res/008.jpg" width=320 height=480 /><img src="https://github.com/Asher-1/text_detection/edit/master/text-detection-ctpn/data/res_oriented/008.jpg" width=320 height=480 />
+<img src="https://github.com/Asher-1/text_detection/blob/master/text-detection-ctpn/data/res/007.jpg" width=320 height=240 /><img src="https://github.com/Asher-1/text_detection/blob/master/text-detection-ctpn/data/res_oriented/007.jpg" width=320 height=240 />
+<img src="https://github.com/Asher-1/text_detection/blob/master/text-detection-ctpn/data/res/008.jpg" width=320 height=480 /><img src="https://github.com/Asher-1/text_detection/blob/master/text-detection-ctpn/data/res_oriented/008.jpg" width=320 height=480 />
 ***
