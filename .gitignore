@@ -20,7 +20,8 @@
 \#*#
 .idea
 *.sublime-*
-.DS_Store
+*.DS_Store
+*.zip
 
 .pytest_cache
 
