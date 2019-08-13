@@ -1,4 +1,4 @@
-#-*- coding:utf-8 -*-
+# -*- coding:utf-8 -*-
 import os
 import json
 import threading
@@ -24,14 +24,13 @@ from keras.callbacks import EarlyStopping, ModelCheckpoint, LearningRateSchedule
 from imp import reload
 import densenet
 
-
-img_h = 32
-img_w = 280
-batch_size = 128
+img_h = 64
+img_w = 518
+batch_size = 64
 maxlabellength = 10
 
-def get_session(gpu_fraction=1.0):
 
+def get_session(gpu_fraction=1.0):
     num_threads = os.environ.get('OMP_NUM_THREADS')
     gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=gpu_fraction)
 
@@ -40,6 +39,7 @@ def get_session(gpu_fraction=1.0):
             gpu_options=gpu_options, intra_op_parallelism_threads=num_threads))
     else:
         return tf.Session(config=tf.ConfigProto(gpu_options=gpu_options))
+
 
 def readfile(filename):
     res = []
@@ -53,18 +53,21 @@ def readfile(filename):
         dic[p[0]] = p[1:]
     return dic
 
+
 class random_uniform_num():
     """
     均匀随机，确保每轮每个只出现一次
     """
+
     def __init__(self, total):
         self.total = total
         self.range = [i for i in range(total)]
         np.random.shuffle(self.range)
         self.index = 0
+
     def get(self, batchsize):
-        r_n=[]
-        if(self.index + batchsize > self.total):
+        r_n = []
+        if (self.index + batchsize > self.total):
             r_n_1 = self.range[self.index:self.total]
             np.random.shuffle(self.range)
             self.index = (self.index + batchsize) - self.total
@@ -72,10 +75,11 @@ class random_uniform_num():
             r_n.extend(r_n_1)
             r_n.extend(r_n_2)
         else:
-            r_n = self.range[self.index : self.index + batchsize]
+            r_n = self.range[self.index: self.index + batchsize]
             self.index = self.index + batchsize
 
         return r_n
+
 
 def gen(data_file, image_path, batchsize=128, maxlabellength=10, imagesize=(32, 280)):
     image_label = readfile(data_file)
@@ -91,6 +95,8 @@ def gen(data_file, image_path, batchsize=128, maxlabellength=10, imagesize=(32, 
         shufimagefile = _imagefile[r_n.get(batchsize)]
         for i, j in enumerate(shufimagefile):
             img1 = Image.open(os.path.join(image_path, j)).convert('L')
+            # import shutil
+            # shutil.copy(os.path.join(image_path, j), "./images/")
             img = np.array(img1, 'f') / 255.0 - 0.5
 
             x[i] = np.expand_dims(img, axis=2)
@@ -98,22 +104,24 @@ def gen(data_file, image_path, batchsize=128, maxlabellength=10, imagesize=(32, 
             str = image_label[j]
             label_length[i] = len(str)
 
-            if(len(str) <= 0):
+            if (len(str) <= 0):
                 print("len < 0", j)
             input_length[i] = imagesize[1] // 8
             labels[i, :len(str)] = [int(k) - 1 for k in str]
 
         inputs = {'the_input': x,
-                'the_labels': labels,
-                'input_length': input_length,
-                'label_length': label_length,
-                }
+                  'the_labels': labels,
+                  'input_length': input_length,
+                  'label_length': label_length,
+                  }
         outputs = {'ctc': np.zeros([batchsize])}
         yield (inputs, outputs)
+
 
 def ctc_lambda_func(args):
     y_pred, labels, input_length, label_length = args
     return K.ctc_batch_cost(labels, y_pred, input_length, label_length)
+
 
 def get_model(img_h, nclass):
     input = Input(shape=(img_h, None, 1), name='the_input')
@@ -135,36 +143,46 @@ def get_model(img_h, nclass):
 
 
 if __name__ == '__main__':
-    char_set = open('char_std_5990.txt', 'r', encoding='utf-8').readlines()
+    ROOT_PATH = "/media/yons/data/dataset/images/text_data/chinese_ocr/"
+    MODEL_PATH = "/media/yons/data/dataset/models/text_detection_models/chinese_ocr/"
+
+    char_set = open('char_std_6283.txt', 'r', encoding='utf-8').readlines()
+    char_set = list(set(char_set))
     char_set = ''.join([ch.strip('\n') for ch in char_set][1:] + ['卍'])
-    nclass = len(char_set)
+    nclass = len(char_set) + 1
 
     K.set_session(get_session())
     reload(densenet)
     basemodel, model = get_model(img_h, nclass)
 
-    modelPath = './models/pretrain_model/keras.h5'
-    if os.path.exists(modelPath):
-        print("Loading model weights...")
-        basemodel.load_weights(modelPath)
-        print('done!')
+    # modelPath = './models/pretrain_model/keras.h5'
+    # modelPath = MODEL_PATH + 'models/pretrain_model/weights_densenet.h5'
+    # if os.path.exists(modelPath):
+    #     print("Loading model weights...")
+    #     basemodel.load_weights(modelPath)
+    #     print('done!')
 
-    train_loader = gen('data_train.txt', './images', batchsize=batch_size, maxlabellength=maxlabellength, imagesize=(img_h, img_w))
-    test_loader = gen('data_test.txt', './images', batchsize=batch_size, maxlabellength=maxlabellength, imagesize=(img_h, img_w))
+    train_loader = gen(ROOT_PATH + 'data_train.txt', ROOT_PATH + 'images', batchsize=batch_size,
+                       maxlabellength=maxlabellength,
+                       imagesize=(img_h, img_w))
+    test_loader = gen(ROOT_PATH + 'data_test.txt', ROOT_PATH + 'images', batchsize=batch_size,
+                      maxlabellength=maxlabellength,
+                      imagesize=(img_h, img_w))
 
-    checkpoint = ModelCheckpoint(filepath='./models/weights_densenet-{epoch:02d}-{val_loss:.2f}.h5', monitor='val_loss', save_best_only=False, save_weights_only=True)
-    lr_schedule = lambda epoch: 0.0005 * 0.4**epoch
+    checkpoint = ModelCheckpoint(filepath=MODEL_PATH + 'models/weights_densenet-{epoch:02d}-{val_loss:.2f}.h5',
+                                 monitor='val_loss',
+                                 save_best_only=False, save_weights_only=True)
+    lr_schedule = lambda epoch: 0.0005 * 0.4 ** epoch
     learning_rate = np.array([lr_schedule(i) for i in range(10)])
     changelr = LearningRateScheduler(lambda epoch: float(learning_rate[epoch]))
     earlystop = EarlyStopping(monitor='val_loss', patience=2, verbose=1)
-    tensorboard = TensorBoard(log_dir='./models/logs', write_graph=True)
+    tensorboard = TensorBoard(log_dir=MODEL_PATH + 'models/logs', write_graph=True)
 
     print('-----------Start training-----------')
     model.fit_generator(train_loader,
-    	steps_per_epoch = 3607567 // batch_size,
-    	epochs = 10,
-    	initial_epoch = 0,
-    	validation_data = test_loader,
-    	validation_steps = 36440 // batch_size,
-    	callbacks = [checkpoint, earlystop, changelr, tensorboard])
-
+                        steps_per_epoch=3607567 // batch_size,
+                        epochs=10,
+                        initial_epoch=0,
+                        validation_data=test_loader,
+                        validation_steps=36440 // batch_size,
+                        callbacks=[checkpoint, earlystop, changelr, tensorboard])

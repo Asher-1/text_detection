@@ -13,9 +13,9 @@ from nets import model_train as model
 from utils.rpn_msr.proposal_layer import proposal_layer
 from utils.text_connector.detectors import TextDetector
 
-model_path = '/media/yons/data/dataset/models/ctpn_text_detection_models/output/checkpoints_mlt/'
+model_path = '/media/yons/data/dataset/models/text_detection_models/ctpn_text_detection_models/output/checkpoints_mlt/'
 
-tf.app.flags.DEFINE_string('test_data_path', './data/demo/', '')
+tf.app.flags.DEFINE_string('test_data_path', './data/license/', '')
 tf.app.flags.DEFINE_string('output_path', './data/res/', '')
 tf.app.flags.DEFINE_string('gpu', '0', '')
 tf.app.flags.DEFINE_string('checkpoint_path', model_path, '')

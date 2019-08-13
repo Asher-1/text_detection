@@ -11,7 +11,7 @@ sys.path.append("ocr")
 from angle.predict import predict as angle_detect  ##文字方向检测
 
 # for pytorch version
-# from crnn.crnn import crnnOcr
+from crnn.crnn import crnnOcr
 
 from ctpn.text_detect import text_detect
 from ocr.model import predict as ocr

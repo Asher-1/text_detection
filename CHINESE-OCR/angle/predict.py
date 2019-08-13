@@ -29,7 +29,7 @@ def load():
     model.compile(
         optimizer=sgd, loss='categorical_crossentropy', metrics=['accuracy'])
     model.load_weights(
-        '/home/yons/.deepinwine/Deepin-BaiduNetDisk/dosdevices/z:/media/yons/data/dataset/models/ctpn_text_detection_models/weights/modelAngle.h5')
+        '/media/yons/data/dataset/models/text_detection_models/CHINESE-OCR/modelAngle.h5')
     return model
 
 

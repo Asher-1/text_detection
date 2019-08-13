@@ -1,8 +1,5 @@
-import os
 import sys, os
 pwd = os.getcwd()
-import numpy as np
-from PIL import Image
 
 from config import yoloCfg,yoloWeights,yoloData,darknetRoot,GPU,GPUID
 os.chdir(darknetRoot)
@@ -38,7 +35,7 @@ def detect_np(net, meta, image, thresh=.5, hier_thresh=.5, nms=.45):
     dn.free_detections(dets, num)
     return res
 
-import cv2
+
 def to_box(r):
     boxes = []
     scores = []
@@ -52,7 +49,6 @@ def to_box(r):
     return boxes,scores
 
 
-import pdb
 if GPU:
     try:
       dn.set_gpu(GPUID)

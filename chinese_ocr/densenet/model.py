@@ -1,4 +1,4 @@
-#-*- coding:utf-8 -*-
+# -*- coding:utf-8 -*-
 import os
 import numpy as np
 from imp import reload
@@ -18,28 +18,33 @@ characters = characters[1:] + u'卍'
 nclass = len(characters)
 
 input = Input(shape=(32, None, 1), name='the_input')
-y_pred= densenet.dense_cnn(input, nclass)
+y_pred = densenet.dense_cnn(input, nclass)
 basemodel = Model(inputs=input, outputs=y_pred)
 
-modelPath = os.path.join(os.getcwd(), 'densenet/models/weights_densenet.h5')
+# modelPath = os.path.join(os.getcwd(), 'densenet/models/weights_densenet.h5')
+modelPath = "/media/yons/data/dataset/models/text_detection_models/chinese_ocr/models/weights_densenet-07-0.05.h5"
 if os.path.exists(modelPath):
+    print("loading weights for recognition : {}".format(modelPath))
     basemodel.load_weights(modelPath)
+
 
 def decode(pred):
     char_list = []
     pred_text = pred.argmax(axis=2)[0]
     for i in range(len(pred_text)):
-        if pred_text[i] != nclass - 1 and ((not (i > 0 and pred_text[i] == pred_text[i - 1])) or (i > 1 and pred_text[i] == pred_text[i - 2])):
+        if pred_text[i] != nclass - 1 and (
+                (not (i > 0 and pred_text[i] == pred_text[i - 1])) or (i > 1 and pred_text[i] == pred_text[i - 2])):
             char_list.append(characters[pred_text[i]])
     return u''.join(char_list)
+
 
 def predict(img):
     width, height = img.size[0], img.size[1]
     scale = height * 1.0 / 32
     width = int(width / scale)
-    
+
     img = img.resize([width, 32], Image.ANTIALIAS)
-   
+
     '''
     img_array = np.array(img.convert('1'))
     boundary_array = np.concatenate((img_array[0, :], img_array[:, width - 1], img_array[31, :], img_array[:, 0]), axis=0)
@@ -48,9 +53,9 @@ def predict(img):
     '''
 
     img = np.array(img).astype(np.float32) / 255.0 - 0.5
-    
+
     X = img.reshape([1, 32, width, 1])
-    
+
     y_pred = basemodel.predict(X)
     y_pred = y_pred[:, :, :]
 

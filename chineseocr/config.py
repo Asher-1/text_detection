@@ -2,7 +2,7 @@ import os
 
 ########################文字检测########################
 ##文字检测引擎 
-pwd = os.getcwd()
+pwd = os.path.dirname(__file__)
 # pwd = "/media/yons/data/dataset/models/ctpn_text_detection_models/weights/chineseocr"
 opencvFlag = 'keras'  ##keras,opencv,darknet，模型性能 keras>darknet>opencv
 IMGSIZE = (608, 608)  ## yolo3 输入图像尺寸
@@ -21,7 +21,7 @@ yoloData = os.path.join(pwd, "models", "text.data")
 ########################文字检测########################
 
 ## GPU选择及启动GPU序号
-GPU = True  ##OCR 是否启用GPU
+GPU = False  ##OCR 是否启用GPU
 GPUID = 0  ##调用GPU序号
 
 ## nms选择,支持cython,gpu,python
