@@ -10,7 +10,7 @@ image_files = glob('./test_images/*.*')
 
 
 if __name__ == '__main__':
-    # os.environ["CUDA_VISIBLE_DEVICES"] = '1'
+    os.environ["CUDA_VISIBLE_DEVICES"] = '1'
     result_dir = './test_result'
     if os.path.exists(result_dir):
         shutil.rmtree(result_dir)

@@ -98,8 +98,8 @@ def gen(data_file, image_path, batchsize=128, maxlabellength=10, imagesize=(32, 
             str = image_label[j]
             label_length[i] = len(str)
 
-            if (len(str) <= 0):
-                print("len < 0", j)
+            if len(str) <= 0:
+                print("len <= 0", j)
             input_length[i] = imagesize[1] // 8
             labels[i, :len(str)] = [int(k) - 1 for k in str]
 
@@ -286,13 +286,20 @@ if __name__ == '__main__':
 
     img_h = 32
     img_w = 280
+    maxlabellength = 15
+
+    ini_epoch = 4
+    epochs = 20
     batch_size = 128
-    maxlabellength = 10
+    # sample_number = 2822680
+    sample_number = 3200000  # 2822680 3520000
 
     # ROOT_PATH = "/media/yons/data/dataset/images/text_data/chinese_ocr_data/"
     ROOT_PATH = "/media/yons/data/dataset/images/text_data/syn_chinese_data/"
     MODEL_PATH = "/media/yons/data/dataset/models/text_detection_models/chinese_ocr/models/"
-    modelPath = os.path.join(MODEL_PATH, 'pretrain_model/weights_densenet.h5')
+    # modelPath = os.path.join(MODEL_PATH, 'pretrain_model/weights_densenet.h5')
+    modelPath = os.path.join(MODEL_PATH, 'output/weights_densenet-04-0.83.h5')
+    # modelPath = ""
 
     char_set = open('char_std_5072.txt', 'r', encoding='utf-8').readlines()
     char_set = ''.join([ch.strip('\n') for ch in char_set][1:] + ['卍'])
@@ -304,19 +311,18 @@ if __name__ == '__main__':
     basemodel, model = get_model(img_h, nclass)
 
     if os.path.exists(modelPath):
-        print("Loading model weights...")
+        print("Loading model weights from {}".format(modelPath))
         try:
             basemodel.load_weights(modelPath)
         except Exception as e:
             print(e)
-        finally:
             load_models(file_path=modelPath, model=basemodel)
         print('done!')
 
-    train_loader = gen(ROOT_PATH + 'data_train.txt', ROOT_PATH + 'images', batchsize=batch_size,
+    train_loader = gen(ROOT_PATH + 'syn_train3.txt', ROOT_PATH + 'syn_images3', batchsize=batch_size,
                        maxlabellength=maxlabellength,
                        imagesize=(img_h, img_w))
-    test_loader = gen(ROOT_PATH + 'data_test.txt', ROOT_PATH + 'images', batchsize=batch_size,
+    test_loader = gen(ROOT_PATH + 'syn_test3.txt', ROOT_PATH + 'syn_images3', batchsize=batch_size,
                       maxlabellength=maxlabellength,
                       imagesize=(img_h, img_w))
 
@@ -324,16 +330,16 @@ if __name__ == '__main__':
                                  monitor='val_loss',
                                  save_best_only=False, save_weights_only=True)
     lr_schedule = lambda epoch: 0.0005 * 0.4 ** epoch
-    learning_rate = np.array([lr_schedule(i) for i in range(10)])
+    learning_rate = np.array([lr_schedule(i) for i in range(epochs)])
     changelr = LearningRateScheduler(lambda epoch: float(learning_rate[epoch]))
-    earlystop = EarlyStopping(monitor='val_loss', patience=2, verbose=1)
+    earlystop = EarlyStopping(monitor='val_loss', patience=5, verbose=1)
     tensorboard = TensorBoard(log_dir=MODEL_PATH + 'logs', write_graph=True)
 
     print('-----------Start training-----------')
     model.fit_generator(train_loader,
-                        steps_per_epoch=3607567 // batch_size,
-                        epochs=10,
-                        initial_epoch=0,
+                        steps_per_epoch=sample_number // batch_size,
+                        epochs=epochs,
+                        initial_epoch=ini_epoch,
                         validation_data=test_loader,
-                        validation_steps=36440 // batch_size,
+                        validation_steps=sample_number // (batch_size * 100),
                         callbacks=[checkpoint, earlystop, changelr, tensorboard])

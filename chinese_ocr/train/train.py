@@ -1,10 +1,9 @@
 # -*- coding:utf-8 -*-
 import os
-import json
-import threading
+import h5py
 import numpy as np
 from PIL import Image
-
+from imp import reload
 import tensorflow as tf
 from keras import losses
 from keras import backend as K
@@ -13,21 +12,15 @@ from keras.preprocessing import image
 from keras.preprocessing.sequence import pad_sequences
 from keras.layers import Input, Dense, Flatten
 from keras.layers.core import Reshape, Masking, Lambda, Permute
-from keras.layers.recurrent import GRU, LSTM
-from keras.layers.wrappers import Bidirectional, TimeDistributed
-from keras.layers.normalization import BatchNormalization
-from keras.layers.convolutional import Conv2D, MaxPooling2D, ZeroPadding2D
 from keras.optimizers import SGD, Adam
+from keras.layers.recurrent import GRU, LSTM
+from keras.layers.normalization import BatchNormalization
+from keras.layers.wrappers import Bidirectional, TimeDistributed
+from keras.layers.convolutional import Conv2D, MaxPooling2D, ZeroPadding2D
 from keras.models import Model
 from keras.callbacks import EarlyStopping, ModelCheckpoint, LearningRateScheduler, TensorBoard
-
-from imp import reload
+from keras.engine.topology import preprocess_weights_for_loading
 import densenet
-
-img_h = 64
-img_w = 518
-batch_size = 64
-maxlabellength = 10
 
 
 def get_session(gpu_fraction=1.0):
@@ -84,6 +77,11 @@ class random_uniform_num():
 def gen(data_file, image_path, batchsize=128, maxlabellength=10, imagesize=(32, 280)):
     image_label = readfile(data_file)
     _imagefile = [i for i, j in image_label.items()]
+
+    # with open("tmp.txt", "w") as fw:
+    #     for img_name in _imagefile:
+    #         fw.write(img_name + "\n")
+
     x = np.zeros((batchsize, imagesize[0], imagesize[1], 1), dtype=np.float)
     labels = np.ones([batchsize, maxlabellength]) * 10000
     input_length = np.zeros([batchsize, 1])
@@ -94,7 +92,11 @@ def gen(data_file, image_path, batchsize=128, maxlabellength=10, imagesize=(32, 
     while 1:
         shufimagefile = _imagefile[r_n.get(batchsize)]
         for i, j in enumerate(shufimagefile):
-            img1 = Image.open(os.path.join(image_path, j)).convert('L')
+            try:
+                img1 = Image.open(os.path.join(image_path, j)).convert('L')
+            except Exception as e:
+                print("\n cannot open file: {}".format(os.path.join(image_path, j)))
+                continue
             # import shutil
             # shutil.copy(os.path.join(image_path, j), "./images/")
             img = np.array(img1, 'f') / 255.0 - 0.5
@@ -142,47 +144,210 @@ def get_model(img_h, nclass):
     return basemodel, model
 
 
-if __name__ == '__main__':
-    ROOT_PATH = "/media/yons/data/dataset/images/text_data/chinese_ocr/"
-    MODEL_PATH = "/media/yons/data/dataset/models/text_detection_models/chinese_ocr/"
+def load_models(file_path, model):
+    def load_weights_from_hdf5_group_by_name(f, layers):
+        """Implements name-based weight loading.
 
-    char_set = open('char_std_6283.txt', 'r', encoding='utf-8').readlines()
-    char_set = list(set(char_set))
+        (instead of topological weight loading).
+
+        Layers that have no matching name are skipped.
+
+        # Arguments
+            f: A pointer to a HDF5 group.
+            layers: a list of target layers.
+
+        # Raises
+            ValueError: in case of mismatch between provided layers
+                and weights file.
+        """
+        if 'keras_version' in f.attrs:
+            original_keras_version = f.attrs['keras_version'].decode('utf8')
+        else:
+            original_keras_version = '1'
+        if 'backend' in f.attrs:
+            original_backend = f.attrs['backend'].decode('utf8')
+        else:
+            original_backend = None
+
+        # New file format.
+        layer_names = [n.decode('utf8') for n in f.attrs['layer_names']]
+
+        # Reverse index of layer name to list of layers with name.
+        index = {}
+        for layer in layers:
+            if layer.name:
+                index.setdefault(layer.name, []).append(layer)
+
+        # We batch weight value assignments in a single backend call
+        # which provides a speedup in TensorFlow.
+        weight_value_tuples = []
+        for k, name in enumerate(layer_names):
+            g = f[name]
+            weight_names = [n.decode('utf8') for n in g.attrs['weight_names']]
+            weight_values = [g[weight_name] for weight_name in weight_names]
+            if weight_names == ['out_2/kernel:0', 'out_2/bias:0']:
+                print("skip {}".format(weight_names))
+                continue
+
+            for layer in index.get(name, []):
+                symbolic_weights = layer.weights
+                weight_values = preprocess_weights_for_loading(
+                    layer,
+                    weight_values,
+                    original_keras_version,
+                    original_backend)
+                if len(weight_values) != len(symbolic_weights):
+                    raise ValueError('Layer #' + str(k) +
+                                     ' (named "' + layer.name +
+                                     '") expects ' +
+                                     str(len(symbolic_weights)) +
+                                     ' weight(s), but the saved weights' +
+                                     ' have ' + str(len(weight_values)) +
+                                     ' element(s).')
+                # Set values.
+                for i in range(len(weight_values)):
+                    weight_value_tuples.append((symbolic_weights[i],
+                                                weight_values[i]))
+        K.batch_set_value(weight_value_tuples)
+
+    def load_weights_from_hdf5_group(f, layers):
+        """Implements topological (order-based) weight loading.
+
+        # Arguments
+            f: A pointer to a HDF5 group.
+            layers: a list of target layers.
+
+        # Raises
+            ValueError: in case of mismatch between provided layers
+                and weights file.
+        """
+        if 'keras_version' in f.attrs:
+            original_keras_version = f.attrs['keras_version'].decode('utf8')
+        else:
+            original_keras_version = '1'
+        if 'backend' in f.attrs:
+            original_backend = f.attrs['backend'].decode('utf8')
+        else:
+            original_backend = None
+
+        filtered_layers = []
+        for layer in layers:
+            weights = layer.weights
+            if weights:
+                filtered_layers.append(layer)
+
+        layer_names = [n.decode('utf8') for n in f.attrs['layer_names']]
+        filtered_layer_names = []
+        for name in layer_names:
+            g = f[name]
+            weight_names = [n.decode('utf8') for n in g.attrs['weight_names']]
+            print(name)
+            if weight_names:
+                filtered_layer_names.append(name)
+        layer_names = filtered_layer_names
+        if len(layer_names) != len(filtered_layers):
+            raise ValueError('You are trying to load a weight file '
+                             'containing ' + str(len(layer_names)) +
+                             ' layers into a model with ' +
+                             str(len(filtered_layers)) + ' layers.')
+
+        # We batch weight value assignments in a single backend call
+        # which provides a speedup in TensorFlow.
+        weight_value_tuples = []
+        for k, name in enumerate(layer_names):
+            g = f[name]
+            weight_names = [n.decode('utf8') for n in g.attrs['weight_names']]
+            weight_values = [g[weight_name] for weight_name in weight_names]
+            layer = filtered_layers[k]
+            symbolic_weights = layer.weights
+            weight_values = preprocess_weights_for_loading(layer,
+                                                           weight_values,
+                                                           original_keras_version,
+                                                           original_backend)
+            if len(weight_values) != len(symbolic_weights):
+                raise ValueError('Layer #' + str(k) +
+                                 ' (named "' + layer.name +
+                                 '" in the current model) was found to '
+                                 'correspond to layer ' + name +
+                                 ' in the save file. '
+                                 'However the new layer ' + layer.name +
+                                 ' expects ' + str(len(symbolic_weights)) +
+                                 ' weights, but the saved weights have ' +
+                                 str(len(weight_values)) +
+                                 ' elements.')
+            weight_value_tuples += zip(symbolic_weights, weight_values)
+        K.batch_set_value(weight_value_tuples)
+
+    if h5py is None:
+        raise ImportError('`load_weights` requires h5py.')
+    f = h5py.File(file_path, mode='r')
+    if 'layer_names' not in f.attrs and 'model_weights' in f:
+        f = f['model_weights']
+    load_weights_from_hdf5_group_by_name(f, model.layers)
+
+    if hasattr(f, 'close'):
+        f.close()
+
+
+if __name__ == '__main__':
+    ROOT_PATH = "/media/yons/data/dataset/images/text_data/chinese_ocr_data/"
+    MODEL_PATH = "/media/yons/data/dataset/models/text_detection_models/chinese_ocr/models2/"
+
+    os.environ['CUDA_VISIBLE_DEVICES'] = "1"
+
+    img_h = 32
+    img_w = 280
+    maxlabellength = 10
+
+    ini_epoch = 10
+    epochs = 20
+    batch_size = 128
+    # sample_number = 3607567
+    sample_number = 5507567
+
+    # modelPath = os.path.join("models", 'pretrain_model/weights_densenet.h5')
+    modelPath = os.path.join(MODEL_PATH, 'output/weights_densenet-08-0.0914.h5')
+
+    char_set = open('char_std_6266.txt', 'r', encoding='utf-8').readlines()
     char_set = ''.join([ch.strip('\n') for ch in char_set][1:] + ['卍'])
-    nclass = len(char_set) + 1
+    nclass = len(char_set)
+    print("nclass : {}".format(nclass))
 
     K.set_session(get_session())
     reload(densenet)
     basemodel, model = get_model(img_h, nclass)
 
-    # modelPath = './models/pretrain_model/keras.h5'
-    # modelPath = MODEL_PATH + 'models/pretrain_model/weights_densenet.h5'
-    # if os.path.exists(modelPath):
-    #     print("Loading model weights...")
-    #     basemodel.load_weights(modelPath)
-    #     print('done!')
+    if os.path.exists(modelPath):
+        print("Loading model weights from {}".format(modelPath))
+        try:
+            basemodel.load_weights(modelPath)
+        except Exception as e:
+            print(e)
+            load_models(file_path=modelPath, model=basemodel)
+        print('done!')
 
-    train_loader = gen(ROOT_PATH + 'data_train.txt', ROOT_PATH + 'images', batchsize=batch_size,
+    train_loader = gen(ROOT_PATH + 'syn_train.txt', ROOT_PATH + 'syn_images2', batchsize=batch_size,
                        maxlabellength=maxlabellength,
                        imagesize=(img_h, img_w))
-    test_loader = gen(ROOT_PATH + 'data_test.txt', ROOT_PATH + 'images', batchsize=batch_size,
+    test_loader = gen(ROOT_PATH + 'syn_test.txt', ROOT_PATH + 'syn_images2', batchsize=batch_size,
                       maxlabellength=maxlabellength,
                       imagesize=(img_h, img_w))
 
-    checkpoint = ModelCheckpoint(filepath=MODEL_PATH + 'models/weights_densenet-{epoch:02d}-{val_loss:.2f}.h5',
+    checkpoint = ModelCheckpoint(filepath=MODEL_PATH + 'output/weights_densenet-{epoch:02d}-{val_loss:.4f}.h5',
                                  monitor='val_loss',
-                                 save_best_only=False, save_weights_only=True)
+                                 save_best_only=False,
+                                 save_weights_only=True)
     lr_schedule = lambda epoch: 0.0005 * 0.4 ** epoch
-    learning_rate = np.array([lr_schedule(i) for i in range(10)])
+    learning_rate = np.array([lr_schedule(i) for i in range(epochs)])
     changelr = LearningRateScheduler(lambda epoch: float(learning_rate[epoch]))
-    earlystop = EarlyStopping(monitor='val_loss', patience=2, verbose=1)
-    tensorboard = TensorBoard(log_dir=MODEL_PATH + 'models/logs', write_graph=True)
+    earlystop = EarlyStopping(monitor='val_loss', patience=5, verbose=1)
+    tensorboard = TensorBoard(log_dir=MODEL_PATH + 'logs', write_graph=True)
 
     print('-----------Start training-----------')
     model.fit_generator(train_loader,
-                        steps_per_epoch=3607567 // batch_size,
-                        epochs=10,
-                        initial_epoch=0,
+                        steps_per_epoch=sample_number // batch_size,
+                        epochs=epochs,
+                        initial_epoch=ini_epoch,
                         validation_data=test_loader,
-                        validation_steps=36440 // batch_size,
+                        validation_steps=sample_number // (batch_size * 100),
                         callbacks=[checkpoint, earlystop, changelr, tensorboard])
