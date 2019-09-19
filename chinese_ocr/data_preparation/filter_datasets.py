@@ -8,8 +8,8 @@ TIME         :  2019/8/20 下午5:19
 PRODUCT_NAME :  PyCharm
 """
 
-import os
-import shutil
+from os.path import join
+from shutil import copy as s_copy
 from tqdm import tqdm
 
 
@@ -23,8 +23,8 @@ def merge_dataset(out_file, input_file):
             if len(lable) != 15:
                 continue
             image_file = line[0]
-            image_path = os.path.join(IMAGE_PATH, image_file)
-            shutil.copy(image_path, OUT_PATH)
+            image_path = join(IMAGE_PATH, image_file)
+            s_copy(image_path, OUT_PATH)
             text = "{}\n".format(data)
             valid_number += 1
             fw.write(text)

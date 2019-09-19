@@ -27,26 +27,26 @@ def merge_dataset(out_file, input_file1, input_file2):
             text = "{}\n".format(merge_line)
             fw.write(text)
 
-        for data in tqdm(data_list2):
-            image_file = data.split()[0]
-            image_path = os.path.join(IMAGE_PATH, image_file)
-            shutil.copy(image_path, OUT_PATH)
+        # for data in tqdm(data_list2):
+        #     image_file = data.split()[0]
+        #     image_path = os.path.join(IMAGE_PATH, image_file)
+        #     shutil.copy(image_path, OUT_PATH)
 
 
 if __name__ == '__main__':
     # ROOT_PATH = "/media/yons/data/dataset/images/text_data/syn_chinese_data/"
     ROOT_PATH = "/media/yons/data/dataset/images/text_data/chinese_ocr_data/"
 
-    IMAGE_PATH = ROOT_PATH + "images2"
-    TRAIN_DATA2 = ROOT_PATH + "data_train2.txt"
-    TEST_DATA2 = ROOT_PATH + "data_test2.txt"
+    IMAGE_PATH = ROOT_PATH + "images1"
+    TRAIN_DATA2 = ROOT_PATH + "data_train.txt"
+    TEST_DATA2 = ROOT_PATH + "data_test.txt"
 
-    TRAIN_DATA = ROOT_PATH + "data_train.txt"
-    TEST_DATA = ROOT_PATH + "data_test.txt"
+    TRAIN_DATA = ROOT_PATH + "data_train3.txt"
+    TEST_DATA = ROOT_PATH + "data_test3.txt"
 
-    OUT_PATH = ROOT_PATH + "images"
-    TRAIN_OUT = ROOT_PATH + "syn_train.txt"
-    TEST_OUT = ROOT_PATH + "syn_test.txt"
+    OUT_PATH = ROOT_PATH + "syn_images2"
+    TRAIN_OUT = ROOT_PATH + "syn_train2.txt"
+    TEST_OUT = ROOT_PATH + "syn_test2.txt"
 
     print("start merging training dataset")
     merge_dataset(TRAIN_OUT, TRAIN_DATA, TRAIN_DATA2)

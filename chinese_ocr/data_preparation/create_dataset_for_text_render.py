@@ -77,6 +77,8 @@ def generate_annotations(annotation, data, char_dict):
             if len(char_string) < 10:
                 print("invalid length : {}".format(len(char_string)))
                 continue
+            if not os.path.exists(os.path.join(IMAGE_PATH, file_name)):
+                continue
             label = file_name + " " + " ".join([str(char_dict[char]) for char in char_string]) + "\n"
             f.write(label)
 
@@ -119,11 +121,11 @@ if __name__ == '__main__':
     # ROOT_PATH = "/media/yons/data/dataset/images/text_data/syn_chinese_data"
     ROOT_PATH = "/media/yons/data/dataset/images/text_data/chinese_ocr_data"
     CHAR_SET = "char_std_6266.txt"
-    IMAGE_PATH = os.path.join(ROOT_PATH, "images2")
+    IMAGE_PATH = os.path.join(ROOT_PATH, "syn_images2")
     LABEL_TXT = os.path.join(IMAGE_PATH, "tmp_labels.txt")
 
-    TRAIN_ANNOTATION_PATH = os.path.join(ROOT_PATH, "data_train2.txt")
-    TEST_ANNOTATION_PATH = os.path.join(ROOT_PATH, "data_test2.txt")
+    TRAIN_ANNOTATION_PATH = os.path.join(ROOT_PATH, "syn_train3.txt")
+    TEST_ANNOTATION_PATH = os.path.join(ROOT_PATH, "syn_test3.txt")
 
     create_dataset()
     # create_keys()

@@ -14,11 +14,14 @@ PRODUCT_NAME :  PyCharm
 #     for char in char_set:
 #         f.write(char)
 
-import os
 import shutil
-import datetime
 from tqdm import tqdm
-
+from os.path import basename
+from os.path import splitext
+from os.path import join
+from os import walk
+from datetime import datetime
+from shutil import copy as s_copy
 
 def getFilePathList(file_dir):
     '''
@@ -27,8 +30,8 @@ def getFilePathList(file_dir):
     :return:
     '''
     filePath_list = []
-    for walk in os.walk(file_dir):
-        part_filePath_list = [os.path.join(walk[0], file) for file in walk[2]]
+    for w in walk(file_dir):
+        part_filePath_list = [join(w[0], file) for file in w[2]]
         filePath_list.extend(part_filePath_list)
     return filePath_list
 
@@ -47,8 +50,8 @@ def get_files_list(file_dir, postfix='ALL'):
         file_list = filePath_list
     else:
         for file in filePath_list:
-            basename = os.path.basename(file)  # 获得路径下的文件名
-            postfix_name = basename.split('.')[-1]
+            b_name = basename(file)  # 获得路径下的文件名
+            postfix_name = b_name.split('.')[-1]
             if postfix_name == postfix:
                 file_list.append(file)
     file_list.sort()
@@ -82,8 +85,8 @@ def generate_dataset(data, label_file):
     ignore_num = 0
     with open(label_file, "w") as f:
         for file in tqdm(data):
-            file_name = os.path.basename(file)
-            file_ext = os.path.splitext(file_name)[-1]
+            file_name = basename(file)
+            file_ext = splitext(file_name)[-1]
             char_list = file_name.split("_")[0].split()
             char_num = len(char_list)
             if char_num < 2:
@@ -93,11 +96,11 @@ def generate_dataset(data, label_file):
                 print("invalid length : {}".format(char_num))
                 continue
 
-            random_string = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+            random_string = datetime.now().strftime("%Y%m%d%H%M%S")
             file_name = "{}{}{}".format(random_string, image_indx, file_ext)
             image_indx += 1
             label = file_name + " " + " ".join([str(char_dict[char]) for char in char_list]) + "\n"
-            shutil.copy(file, os.path.join(out_PATH, file_name))
+            s_copy(file, join(out_PATH, file_name))
             f.write(label)
     print("ignore number : {}".format(ignore_num))
     return image_indx

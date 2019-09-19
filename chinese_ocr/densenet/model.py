@@ -22,8 +22,8 @@ y_pred = densenet.dense_cnn(input, nclass)
 basemodel = Model(inputs=input, outputs=y_pred)
 
 # modelPath = os.path.join(os.getcwd(), 'densenet/models/weights_densenet.h5')
-modelPath = "/media/yons/data/dataset/models/text_detection_models/chinese_ocr/models/output/" \
-            "weights_densenet-09-1.32.h5"
+modelPath = "/media/yons/data/dataset/models/text_detection_models/chinese_ocr/models2/output/" \
+            "weights_densenet-06-0.0945.h5"
 if os.path.exists(modelPath):
     print("loading weights for recognition : {}".format(modelPath))
     basemodel.load_weights(modelPath)

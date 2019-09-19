@@ -301,12 +301,12 @@ if __name__ == '__main__':
 
     ini_epoch = 10
     epochs = 20
-    batch_size = 128
+    batch_size = 240  # 128
     # sample_number = 3607567
-    sample_number = 5507567
+    sample_number = 5507493
 
     # modelPath = os.path.join("models", 'pretrain_model/weights_densenet.h5')
-    modelPath = os.path.join(MODEL_PATH, 'output/weights_densenet-08-0.0914.h5')
+    modelPath = os.path.join(MODEL_PATH, 'output/weights_densenet-08-0.0974.h5')
 
     char_set = open('char_std_6266.txt', 'r', encoding='utf-8').readlines()
     char_set = ''.join([ch.strip('\n') for ch in char_set][1:] + ['卍'])
@@ -326,10 +326,10 @@ if __name__ == '__main__':
             load_models(file_path=modelPath, model=basemodel)
         print('done!')
 
-    train_loader = gen(ROOT_PATH + 'syn_train.txt', ROOT_PATH + 'syn_images2', batchsize=batch_size,
+    train_loader = gen(ROOT_PATH + 'syn_train2.txt', ROOT_PATH + 'syn_images2', batchsize=batch_size,
                        maxlabellength=maxlabellength,
                        imagesize=(img_h, img_w))
-    test_loader = gen(ROOT_PATH + 'syn_test.txt', ROOT_PATH + 'syn_images2', batchsize=batch_size,
+    test_loader = gen(ROOT_PATH + 'syn_test2.txt', ROOT_PATH + 'syn_images2', batchsize=batch_size,
                       maxlabellength=maxlabellength,
                       imagesize=(img_h, img_w))
 

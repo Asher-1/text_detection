@@ -8,9 +8,10 @@ TIME         :  2019/8/14 下午4:59
 PRODUCT_NAME :  PyCharm
 """
 
-import os
-import shutil
+
+from shutil import copy as s_copy
 from tqdm import tqdm
+from os.path import join
 
 
 def merge_dataset(out_file, input_1, input_2):
@@ -19,12 +20,12 @@ def merge_dataset(out_file, input_1, input_2):
         data_list2 = fr2.read().splitlines()
         for data in tqdm(data_list1):
             image_file = data.split()[0]
-            image_path = os.path.join(IMAGE_PATH1, image_file)
-            shutil.copy(image_path, OUT_PATH)
+            image_path = join(IMAGE_PATH1, image_file)
+            s_copy(image_path, OUT_PATH)
         for data in tqdm(data_list2):
             image_file = data.split()[0]
-            image_path = os.path.join(IMAGE_PATH2, image_file)
-            shutil.copy(image_path, OUT_PATH)
+            image_path = join(IMAGE_PATH2, image_file)
+            s_copy(image_path, OUT_PATH)
 
         merge_list = []
         merge_list.extend(data_list1)
