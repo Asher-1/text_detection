@@ -8,6 +8,7 @@ TIME         :  2019/7/29 下午1:22
 PRODUCT_NAME :  PyCharm
 """
 import os
+import io
 import cv2
 import json
 import regex
@@ -17,6 +18,8 @@ import base64
 import random
 import datetime
 import requests
+import numpy as np
+from PIL import Image
 
 
 def fuzzy_match(text, target, max_error_num=None):
@@ -31,35 +34,17 @@ def fuzzy_match(text, target, max_error_num=None):
 
 def convert_pdf_to_image(pdf_file):
     import tempfile
-    from pdf2image import convert_from_path
-    with tempfile.TemporaryDirectory() as path:
-        image_list = convert_from_path(pdf_file, output_folder=path)
+    if isinstance(pdf_file, str):
+        from pdf2image import convert_from_path
+        with tempfile.TemporaryDirectory() as path:
+            image_list = convert_from_path(pdf_file, output_folder=path)
+    elif isinstance(pdf_file, bytes):
+        from pdf2image import convert_from_bytes
+        with tempfile.TemporaryDirectory() as path:
+            image_list = convert_from_bytes(pdf_file, output_folder=path)
+    else:
+        raise TypeError("cannot parse unknown type: {}".format(type(pdf_file)))
     return image_list
-
-
-def read_img_base64(p):
-    with open(p, 'rb') as f:
-        imgString = base64.b64encode(f.read())
-    imgString = b'data:image/jpeg;base64,' + imgString
-    return imgString.decode()
-
-
-def post_web(file, bill_model='通用OCR', url='http://127.0.0.1:8080/ocr', text_angle=False, text_line=False):
-    res_dict = {}
-    try:
-        imgString = read_img_base64(file)
-        param = {'billModel': bill_model,
-                 'imgString': imgString,
-                 'textAngle': text_angle,
-                 'textLine': text_line, }
-        param = json.dumps(param)
-        req = requests.post(url, data=param, timeout=20)
-        data = req.content.decode('utf-8')
-        res_dict = json.loads(data)
-    except Exception as e:
-        print(e)
-    finally:
-        return res_dict
 
 
 def dir_nonempty(dirname):
@@ -105,24 +90,37 @@ def generate_unique_id():
     return now_random_str
 
 
+def get_image_from_io(file):
+    try:
+        image_array = np.asarray(Image.open(io.BytesIO(file.read())))
+        file.seek(0)
+    except (OSError, NameError):
+        return None
+    return image_array
+
+
 def preprocess_images(file, tmp_folder, ext_format):
     # from werkzeug import secure_filename
     # filename = secure_filename(file.filename)
     filename = file.filename
     file_extention = filename.split('.')[-1]
-    save_file_name = "{}.{}".format(generate_unique_id(), file_extention)
-    save_file_path = os.path.join(tmp_folder, save_file_name)
-    file.save(save_file_path)
+
     file_path_list = []
     if file_extention == "pdf":
-        pl_image_list = convert_pdf_to_image(save_file_path)
-        save_file_name = os.path.splitext(save_file_name)[0]
+        pl_image_list = convert_pdf_to_image(file.read())
+        # save_file_name = os.path.splitext(save_file_name)[0]
         for index, img in enumerate(pl_image_list):
-            tmp_name = os.path.join(tmp_folder, "{}_{}.{}".format(save_file_name, index, ext_format))
-            file_path_list.append(tmp_name)
-            img.save(tmp_name, ext_format)
+            # tmp_name = os.path.join(tmp_folder, "{}_{}.{}".format(save_file_name, index, ext_format))
+            ret, buf = cv2.imencode(".jpg", np.asarray(img))
+            image_bytes = Image.fromarray(np.uint8(buf)).tobytes()
+            file_path_list.append(image_bytes)
+            # img.save(tmp_name, ext_format)
     elif file_extention in ["doc", "docx"]:
         from docx import Document
+        save_file_name = "{}.{}".format(generate_unique_id(), file_extention)
+        os.makedirs(tmp_folder)
+        save_file_path = os.path.join(tmp_folder, save_file_name)
+        file.save(save_file_path)
         doc = Document(save_file_path)
         for shape in doc.inline_shapes:
             content_id = shape._inline.graphic.graphicData.pic.blipFill.blip.embed
@@ -130,14 +128,44 @@ def preprocess_images(file, tmp_folder, ext_format):
             if not content_type.startswith("image"):
                 continue
             img_data = doc.part.related_parts[content_id]._blob
-            save_file_name = os.path.basename(doc.part.related_parts[content_id].partname)
-            tmp_name = os.path.join(tmp_folder, save_file_name)
-            file_path_list.append(tmp_name)
-            with open(tmp_name, 'wb') as fp:
-                fp.write(img_data)
+            # save_file_name = os.path.basename(doc.part.related_parts[content_id].partname)
+            # tmp_name = os.path.join(tmp_folder, save_file_name)
+            file_path_list.append(img_data)
+            # with open(tmp_name, 'wb') as fp:
+            #     fp.write(img_data)
     else:
-        file_path_list.append(save_file_path)
+        file_path_list.append(file.read())
     return file_path_list
+
+
+def read_img_base64(p):
+    if isinstance(p, bytes):
+        imgString = base64.b64encode(p)
+    elif isinstance(p, str):
+        with open(p, 'rb') as f:
+            imgString = base64.b64encode(f.read())
+    else:
+        raise TypeError("cannot parse unknown type: {}".format(type(p)))
+    imgString = b'data:image/jpeg;base64,' + imgString
+    return imgString.decode()
+
+
+def post_web(file, bill_model='通用OCR', url='http://127.0.0.1:8080/ocr', text_angle=False, text_line=False):
+    res_dict = {}
+    try:
+        imgString = read_img_base64(file)
+        param = {'billModel': bill_model,
+                 'imgString': imgString,
+                 'textAngle': text_angle,
+                 'textLine': text_line, }
+        param = json.dumps(param)
+        req = requests.post(url, data=param)
+        data = req.content.decode('utf-8')
+        res_dict = json.loads(data)
+    except Exception as e:
+        print(e)
+    finally:
+        return res_dict
 
 
 def his_equl_color1(img):

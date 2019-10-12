@@ -35,7 +35,6 @@ class BusinessLicense:
         No = {}
         for i in range(self.N):
             txt = self.result[i]['text'].replace(' ', '')
-            key = ""
             t1 = fuzzy_match(txt, target="注册号")
             t2 = fuzzy_match(txt, target="证照编号")
             if t1 in txt and t1 != "":

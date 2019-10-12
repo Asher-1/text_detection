@@ -39,14 +39,13 @@ class idcard:
                 break
         if "姓名" not in self.res.keys():
             txt = self.result[0]['text'].replace(' ', '')
-            if len(txt) == 2:
+            fuz = fuzzy_match(text=txt, target='姓名')
+            txt = txt.replace(fuz, '')
+            if len(txt) <= 4:
                 name['姓名'] = txt
-            elif len(txt) == 3:
-                name['姓名'] = txt[1:]
-            elif len(txt) > 3:
-                name['姓名'] = txt[2:]
-            if 1 < len(name['姓名']) < 5:
-                self.res.update(name)
+            elif len(txt) > 4:
+                name['姓名'] = txt[-4:]
+            self.res.update(name)
 
     def sex(self):
         """
@@ -76,14 +75,23 @@ class idcard:
         for i in range(self.N):
             txt = self.result[i]['text'].replace(' ', '')
             txt = txt.replace(' ', '')
-            ##出生年月
-            res = re.findall('出生\d*年\d*月\d*日', txt)
-            res = re.findall('\d*年\d*月\d*日', txt)
+            t1 = fuzzy_match(text=txt, target="出生")
+            if t1 != "":
+                # 出生年月
+                # res = re.findall('\d*年\d*月\d*日', txt)
+                res = re.findall(r'\d{4}(.?)\d{1,2}(.?)\d{1,2}(.?)', txt)
+                if len(res) > 0 and len(res[0]) > 0:
+                    txt = txt.replace(t1, '').replace(res[0][-1], '')
+                    for i in range(len(res[0])-1):
+                        txt = txt.replace(res[0][i], '-')
+                    birth['出生'] = txt
+                    self.res.update(birth)
+                    break
 
-            if len(res) > 0:
-                birth['出生'] = res[0].replace('出生', '').replace('年', '-').replace('月', '-').replace('日', '')
-                self.res.update(birth)
-                break
+            # if len(res) > 0:
+            #     birth['出生'] = res[0].replace('出生', '').replace('年', '-').replace('月', '-').replace('日', '')
+            #     self.res.update(birth)
+            #     break
 
     def birthNo(self):
         """

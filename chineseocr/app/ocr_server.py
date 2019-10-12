@@ -1,8 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-
-filter_dupicated = False
-debug_mode = False
+debug_mode = True
 if not debug_mode:
     from gevent import monkey
     from gevent.pywsgi import WSGIServer
@@ -11,8 +9,10 @@ if not debug_mode:
 
 import os
 import sys
+import logging
+import traceback
 from apphelper import tools
-from apphelper import pathinfo
+from apphelper import ocr_pathinfo
 
 from flask_restful import Api
 from flask_restful import Resource
@@ -26,13 +26,17 @@ sys.path.append(work_dir)
 
 # the flask app
 app = Flask(__name__)
+gunicorn_logger = logging.getLogger('gunicorn.error')
+app.logger.handlers = gunicorn_logger.handlers
+app.logger.setLevel(gunicorn_logger.level)
+
 # app.config.update(DEBUG=True)
-app.config['TMP_FOLDER'] = pathinfo.TMP_FOLDER
-app.config['OCR_WEB_URL'] = pathinfo.OCR_WEB_URL
+app.config['TMP_FOLDER'] = ocr_pathinfo.TMP_FOLDER
+if not os.path.exists(ocr_pathinfo.TMP_FOLDER):
+    os.makedirs(ocr_pathinfo.TMP_FOLDER)
+app.config['OCR_WEB_URL'] = ocr_pathinfo.OCR_WEB_URL
 
 # the settings for uploading
-
-app.config['last_no_helmet_num'] = -1
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'pdf', 'doc', 'docx'}
 
 
@@ -82,12 +86,16 @@ class Image2Text(Resource):
         ext_format = "png"
         if file and allowed_file(file.filename):
             tmp_folder = os.path.join(tmp_folder, tools.generate_unique_id())
-            os.makedirs(tmp_folder)
             file_path_list = tools.preprocess_images(file, tmp_folder, ext_format)
+            app.logger.info("post file: {}\tnum: {}".format(file.filename, len(file_path_list)))
             # start posting to web with temp images
             for image in file_path_list:
                 res_dict = tools.post_web(image, bill_model=bill_model, url=web_url,
                                           text_angle=text_angle, text_line=text_line)
+                try:
+                    app.logger.info("time take: {}s\t state: {}".format(res_dict['timeTake'], res_dict['state']))
+                except Exception:
+                    app.logger.error(traceback.format_exc())
                 res_list.append(res_dict)
             if tools.dir_nonempty(tmp_folder):
                 tools.empty_dir(tmp_folder, parent=True)
@@ -102,7 +110,7 @@ api.add_resource(Image2Text, '/image2text')
 
 if __name__ == '__main__':
     if not debug_mode:
-        http_server = WSGIServer(('0.0.0.0', 5000), app)
+        http_server = WSGIServer(('0.0.0.0', 9999), app)
         http_server.serve_forever()
     else:
-        app.run(host='0.0.0.0', debug=True)
+        app.run(host='0.0.0.0', port='9999', debug=True)

@@ -16,7 +16,7 @@ def read_img_base64(p):
 
 
 def post(p, billModel='通用OCR'):
-    URL = 'http://127.0.0.1:5000/image2text?'  ##url地址
+    URL = 'http://127.0.0.1:9999/image2text?'  ##url地址
     files = {'file': open(p, 'rb')}
     URL += 'billModel={}&textAngle={}'.format(billModel, True)
     req = requests.post(URL, files=files)
@@ -35,8 +35,8 @@ if __name__ == '__main__':
     # p = '../test/license/BizLicenseOCR2.jpg'
     # post(p, '通用OCR')
 
-    # p = '../test/test_file/yingye.pdf'
+    # p = '../test/license/verifications.jpeg'
     # post(p, '营业执照')
 
-    p = '../test/license/verifications.jpeg'
+    p = '../test/test_file/yingye.pdf'
     post(p, '营业执照')

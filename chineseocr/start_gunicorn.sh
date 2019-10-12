@@ -1,1 +1,0 @@
-gunicorn -k gevent -c gun_conf.py request_server:app
