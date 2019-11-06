@@ -165,10 +165,11 @@ class OCR:
                                                         MAX_HORIZONTAL_GAP=100,  # 字符之间的最大间隔，用于文本行的合并
                                                         MIN_V_OVERLAPS=0.6,
                                                         MIN_SIZE_SIM=0.6,
+                                                        # 0.1 for darknet, 0.05 for keras
                                                         TEXT_PROPOSALS_MIN_SCORE=0.1,
                                                         TEXT_PROPOSALS_NMS_THRESH=0.3,
                                                         TEXT_LINE_NMS_THRESH=0.99,  # 文本行之间测iou值
-                                                        LINE_MIN_SCORE=0.1,
+                                                        LINE_MIN_SCORE=0.1,  # 0.1
                                                         leftAdjustAlph=0.05,  # 对检测的文本行进行向左延伸
                                                         rightAdjustAlph=0.05,  # 对检测的文本行进行向右延伸
                                                         )

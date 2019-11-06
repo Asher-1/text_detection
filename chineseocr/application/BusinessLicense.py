@@ -14,7 +14,7 @@ class BusinessLicense:
 
     def __init__(self, result):
         self.result = union_rbox(result, 0.2)
-        json.dump(self.result, open("result.json", "w"), ensure_ascii=False, indent=4)
+        # json.dump(self.result, open("result.json", "w"), ensure_ascii=False, indent=4)
         self.N = len(self.result)
         self.res = {}
         self.license_number()
@@ -27,6 +27,7 @@ class BusinessLicense:
         self.term_operation()
         self.scope_management()
         self.address()
+        self.offset_x = 0
 
     def license_number(self):
         """
@@ -64,6 +65,9 @@ class BusinessLicense:
             t1 = fuzzy_match(txt, target="统一社会信用代码")
             if t1 in txt and t1 != "":
                 res = re.findall(r"(?<=%s).+" % t1, txt)
+                anchor_cx = float(self.result[i]['cx'])
+                anchor_w = float(self.result[i]['w'])
+                anchor_x = anchor_cx - anchor_w / 2.0
                 if len(res) > 0:
                     no = list(filter(str.isalnum, res[0].strip()))
                     no = "".join(no).strip()
@@ -71,13 +75,18 @@ class BusinessLicense:
                         No["统一社会信用代码"] = no
                         self.res.update(No)
                         break
-                no = list(filter(str.isalnum, self.result[i + 2]['text'].replace(' ', '')))
-                no = "".join(no).strip()
-                if len(no) == 17:
-                    no += 'X'
-                No["统一社会信用代码"] = no
-                self.res.update(No)
-                break
+                for j in range(i + 1, self.N):
+                    cx = float(self.result[j]['cx'])
+                    w = float(self.result[j]['w'])
+                    cor_x = cx - w / 2.0
+                    if abs(cor_x - anchor_x) < 5:
+                        no = list(filter(str.isalnum, self.result[j]['text'].replace(' ', '')))
+                        no = "".join(no).strip()
+                        if len(no) == 17:
+                            no += 'X'
+                        No["统一社会信用代码"] = no
+                        self.res.update(No)
+                        break
 
     def name(self):
         """
@@ -197,10 +206,27 @@ class BusinessLicense:
         for i in range(self.N):
             txt = self.result[i]['text'].replace(' ', '')
             t1 = fuzzy_match(text=txt, target="登记机关")
+            t2 = fuzzy_match(text=txt, target="营业执照")
+            if t2 != "" and len(t2) == 4:
+                self.offset_x = float(self.result[i]['w']) / 3.0
             if t1 != "":
                 if "经营范围" in res_dict.keys():
+                    if txt == "登记机关":
+                        self.offset_x = float(self.result[i]['w'])
+                    else:
+                        self.offset_x = float(self.result[i]['w']) / 2.0
+
+                    anchor_cx = float(self.result[start - 1]['cx'])
+                    anchor_w = float(self.result[start - 1]['w'])
+                    anchor_x = anchor_cx - anchor_w / 2.0 + self.offset_x
                     for j in range(start, i):
-                        res_dict["经营范围"] += self.result[j]['text'].replace(' ', '')
+                        cx = float(self.result[j]['cx'])
+                        w = float(self.result[j]['w'])
+                        cor_x = cx - w / 2.0
+                        if abs(cor_x - anchor_x) < 80:
+                            res_dict["经营范围"] += self.result[j]['text'].replace(' ', '')
+                else:
+                    continue
                 self.res.update(res_dict)
                 break
 

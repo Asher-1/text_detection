@@ -2,6 +2,7 @@
 身份证
 """
 import re
+import json
 from apphelper.image import union_rbox
 from apphelper.tools import fuzzy_match
 
@@ -13,15 +14,50 @@ class idcard:
 
     def __init__(self, result):
         self.result = union_rbox(result, 0.2)
+        # json.dump(self.result, open("result.json", "w"), ensure_ascii=False, indent=4)
         self.N = len(self.result)
         self.res = {}
+        self.organization()
+        self.expiry_date()
         self.full_name()
         self.sex()
         self.birthday()
         self.address()
         self.birthNo()
-        self.organization()
-        self.expiry_date()
+
+    def organization(self):
+        """
+        签发机关
+        """
+        No = {}
+        for i in range(self.N):
+            txt = self.result[i]['text'].replace(' ', '')
+            t1 = fuzzy_match(text=txt, target="签发机关")
+            if t1 == "":
+                continue
+            res = re.findall(r"(?<=%s).+" % t1, txt)
+
+            if len(res) > 0:
+                No['签发机关'] = res[0].strip()
+                self.res.update(No)
+                break
+
+    def expiry_date(self):
+        """
+        有效期限
+        """
+        No = {}
+        for i in range(self.N):
+            txt = self.result[i]['text'].replace(' ', '')
+            t1 = fuzzy_match(text=txt, target="有效期限")
+            if t1 == "":
+                continue
+            res = re.findall(r"(?<=%s).+" % t1, txt)
+
+            if len(res) > 0:
+                No['有效期限'] = res[0].strip()
+                self.res.update(No)
+                break
 
     def full_name(self):
         """
@@ -38,14 +74,21 @@ class idcard:
                 self.res.update(name)
                 break
         if "姓名" not in self.res.keys():
-            txt = self.result[0]['text'].replace(' ', '')
-            fuz = fuzzy_match(text=txt, target='姓名')
-            txt = txt.replace(fuz, '')
-            if len(txt) <= 4:
-                name['姓名'] = txt
-            elif len(txt) > 4:
-                name['姓名'] = txt[-4:]
-            self.res.update(name)
+            for j in range(self.N):
+                txt = self.result[j]['text'].replace(' ', '')
+                if len(txt) > 1:
+                    fuz = fuzzy_match(text=txt, target='姓名')
+                    if '签发机关' in self.res.keys() or '有效期限' in self.res.keys():
+                        if fuz == '':
+                            break
+                    else:
+                        txt = txt.replace(fuz, '')
+                        if len(txt) <= 4:
+                            name['姓名'] = txt
+                        else:
+                            name['姓名'] = txt[-4:]
+                        self.res.update(name)
+                        break
 
     def sex(self):
         """
@@ -74,15 +117,16 @@ class idcard:
         birth = {}
         for i in range(self.N):
             txt = self.result[i]['text'].replace(' ', '')
-            txt = txt.replace(' ', '')
-            t1 = fuzzy_match(text=txt, target="出生")
-            if t1 != "":
-                # 出生年月
+            if '年' in txt or '月' in txt or '日' in txt:
                 # res = re.findall('\d*年\d*月\d*日', txt)
+                txt = txt.replace(' ', '')
+                t1 = fuzzy_match(text=txt, target="出生")
                 res = re.findall(r'\d{4}(.?)\d{1,2}(.?)\d{1,2}(.?)', txt)
                 if len(res) > 0 and len(res[0]) > 0:
-                    txt = txt.replace(t1, '').replace(res[0][-1], '')
-                    for i in range(len(res[0])-1):
+                    if len(t1) > 0:
+                        txt = txt[txt.index(t1[-1]) + 1:]
+                    txt = txt.replace(res[0][-1], '')
+                    for i in range(len(res[0]) - 1):
                         txt = txt.replace(res[0][i], '-')
                     birth['出生'] = txt
                     self.res.update(birth)
@@ -156,37 +200,3 @@ class idcard:
     #     if len(addString) > 0:
     #         add['身份证地址'] = ''.join(addString)
     #         self.res.update(add)
-
-    def organization(self):
-        """
-        签发机关
-        """
-        No = {}
-        for i in range(self.N):
-            txt = self.result[i]['text'].replace(' ', '')
-            t1 = fuzzy_match(text=txt, target="签发机关")
-            if t1 == "":
-                continue
-            res = re.findall(r"(?<=%s).+" % t1, txt)
-
-            if len(res) > 0:
-                No['签发机关'] = res[0].strip()
-                self.res.update(No)
-                break
-
-    def expiry_date(self):
-        """
-        有效期限
-        """
-        No = {}
-        for i in range(self.N):
-            txt = self.result[i]['text'].replace(' ', '')
-            t1 = fuzzy_match(text=txt, target="有效期限")
-            if t1 == "":
-                continue
-            res = re.findall(r"(?<=%s).+" % t1, txt)
-
-            if len(res) > 0:
-                No['有效期限'] = res[0].strip()
-                self.res.update(No)
-                break

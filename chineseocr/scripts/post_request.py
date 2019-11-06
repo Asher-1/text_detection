@@ -16,8 +16,8 @@ def read_img_base64(p):
 
 
 def post(p, billModel='通用OCR'):
-    URL = 'http://127.0.0.1:9999/image2text?'  ##url地址
-    # URL = 'http://47.103.28.225:9999/image2text?'  ##url地址
+    # URL = 'http://127.0.0.1:9999/image2text?'  ##url地址
+    URL = 'http://47.103.28.225:9999/image2text?'  ##url地址
     # URL = 'http://192.168.17.211:9999/image2text?'  ##url地址
     # URL = 'http://erp.erow.cn:22776/image2text?'  ##url地址
 
@@ -42,10 +42,12 @@ if __name__ == '__main__':
     # p = '../test/license/BizLicenseOCR2.jpg'
     # post(p, '通用OCR')
 
-    # p = '../test/test_file/id5.docx'
-    # post(p, '身份证')
+    p = '../test/test_file/id5.docx'
+    post(p, '身份证')
 
-    p = '../test/license/verifications.jpeg'
-    post(p, '营业执照')
+    # p = '../test/license/verifications.jpeg'
+    # p = '../test/license/BizLicenseOCR2.jpg'
+    # p = '../test/license/yingye.pdf'
+    # post(p, '营业执照')
 
     # http://erp.erow.cn:22776/image2text?billModel={'身份证', '营业执照'}&textAngle=True

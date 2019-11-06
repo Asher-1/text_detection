@@ -7,6 +7,7 @@ RUN apt-get install vim libsm6 libxrender1 libxext-dev gcc -y
 ##下载Anaconda3 python 环境安装包 放置在chineseocr目录 url地址https://repo.anaconda.com/archive/Anaconda3-2019.03-Linux-x86_64.sh
 WORKDIR /chineseocr
 ADD . /chineseocr
+RUN cd /chineseocr/darknet && make clean && make && cd ..
 RUN cd /chineseocr && sh -c '/bin/echo -e "\nyes\n\nyes" | sh Anaconda3-2019.03-Linux-x86_64.sh'
 RUN echo -e "\ny" | /root/anaconda3/bin/conda install python=3.6
 RUN /root/anaconda3/bin/pip install easydict opencv-python==4.0.0.21 opencv-contrib-python==4.0.0.21 Cython h5py pandas requests bs4 matplotlib lxml -U pillow keras==2.1.5 tensorflow-gpu==1.9 -i https://pypi.tuna.tsinghua.edu.cn/simple/

@@ -1,5 +1,6 @@
 from ctypes import *
 import math
+import os
 import random
 
 
@@ -48,8 +49,8 @@ class METADATA(Structure):
                 ("names", POINTER(c_char_p))]
 
 
-root = "/home/yons/develop/AI/text_detection/"
-lib = CDLL(root + "chineseocr/darknet/libdarknet.so", RTLD_GLOBAL)
+root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+lib = CDLL(root + "/libdarknet.so", RTLD_GLOBAL)
 # lib = CDLL("libdarknet.so", RTLD_GLOBAL)
 lib.network_width.argtypes = [c_void_p]
 lib.network_width.restype = c_int
