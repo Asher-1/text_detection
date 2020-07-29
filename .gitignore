@@ -54,6 +54,7 @@
 *.swp
 *.pb
 *.ckpt
+*.whl
 
 dist
 buil

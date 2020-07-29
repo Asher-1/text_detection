@@ -1,10 +1,9 @@
 # -*- coding: UTF-8 -*-
 
-debug_mode = True
+debug_mode = False
 if not debug_mode:
     from gevent import monkey
     from gevent.pywsgi import WSGIServer
-
     monkey.patch_all()
 
 import os
@@ -12,7 +11,7 @@ import sys
 import logging
 import traceback
 from apphelper import tools
-from apphelper import ocr_pathinfo
+from projectinfo import ocr_pathinfo
 
 from flask_restful import Api
 from flask_restful import Resource

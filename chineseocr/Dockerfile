@@ -1,21 +1,46 @@
 FROM nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
+#FROM nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
 MAINTAINER https://github.com/chineseocr/chineseocr
 LABEL version="1.0"
 EXPOSE 8080
+EXPOSE 9999
+#RUN apt-get install wget -y
+#RUN wget -qO - https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub | sudo apt-key add -
+#RUN echo "deb https://developer.download.nvidia.com/compute/cuda/repos/$distribution/x86_64 /" | tee /etc/apt/sources.list.d/cuda.list
 RUN apt-get update
-RUN apt-get install vim libsm6 libxrender1 libxext-dev gcc -y
-##下载Anaconda3 python 环境安装包 放置在chineseocr目录 url地址https://repo.anaconda.com/archive/Anaconda3-2019.03-Linux-x86_64.sh
+RUN apt-get install apt-utils vim libsm6 libxrender1 libxext-dev gcc g++ cmake poppler-utils libglib2.0-dev -y
+ENV DEBIAN_FRONTEND noninteractive
+###下载Anaconda3 python 环境安装包 放置在chineseocr目录 url地址https://repo.anaconda.com/archive/Anaconda3-2019.03-Linux-x86_64.sh
 WORKDIR /chineseocr
+ADD Miniconda3-latest-Linux-x86_64.sh /chineseocr
+RUN cd /chineseocr && sh -c '/bin/echo -e "\nyes\n\nyes" | sh Miniconda3-latest-Linux-x86_64.sh'
+#RUN echo -e "\ny" && /root/miniconda3/bin/conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+#RUN /root/miniconda3/bin/conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+#RUN /root/miniconda3/bin/conda config --set show_channel_urls yes
+RUN echo -e "\ny" | /root/miniconda3/bin/conda install python=3.6
+RUN /root/miniconda3/bin/pip install easydict h5py gevent requests -i https://pypi.tuna.tsinghua.edu.cn/simple/
+RUN /root/miniconda3/bin/pip install bs4 matplotlib pillow keras==2.1.5 -U -i https://pypi.tuna.tsinghua.edu.cn/simple/
+RUN /root/miniconda3/bin/pip install pdf2image python-docx -U -i https://pypi.tuna.tsinghua.edu.cn/simple/
+RUN /root/miniconda3/bin/pip install web.py==0.40.dev0 regex redis flask gunicorn flask_restful -i https://pypi.tuna.tsinghua.edu.cn/simple/
+#RUN /root/miniconda3/bin/pip install tensorflow-gpu==1.13.1 -i https://pypi.tuna.tsinghua.edu.cn/simple/
+#RUN echo -e "\ny" | /root/miniconda3/bin/conda install pytorch torchvision cudatoolkit=9.0 -c pytorch
+#RUN /root/miniconda3/bin/pip install torch==1.5.1+cu101 torchvision==0.6.1+cu101 -f https://download.pytorch.org/whl/torch_stable.html -i https://pypi.tuna.tsinghua.edu.cn/simple/
 ADD . /chineseocr
 RUN cd /chineseocr/darknet && make clean && make && cd ..
-RUN cd /chineseocr && sh -c '/bin/echo -e "\nyes\n\nyes" | sh Anaconda3-2019.03-Linux-x86_64.sh'
-RUN echo -e "\ny" | /root/anaconda3/bin/conda install python=3.6
-RUN /root/anaconda3/bin/pip install easydict opencv-python==4.0.0.21 opencv-contrib-python==4.0.0.21 Cython h5py pandas requests bs4 matplotlib lxml -U pillow keras==2.1.5 tensorflow-gpu==1.9 -i https://pypi.tuna.tsinghua.edu.cn/simple/
-RUN /root/anaconda3/bin/pip install web.py==0.40.dev0 regex
-RUN echo -e "\ny" | /root/anaconda3/bin/conda install pytorch torchvision cudatoolkit=9.0 -c pytorch
-RUN rm Anaconda3-2019.03-Linux-x86_64.sh
+RUN /root/miniconda3/bin/pip install /chineseocr/whl/Cython-0.29.21-cp36-cp36m-manylinux1_x86_64.whl -U
+RUN /root/miniconda3/bin/pip install /chineseocr/whl/matplotlib-3.2.2-cp36-cp36m-manylinux1_x86_64.whl -U
+RUN /root/miniconda3/bin/pip install /chineseocr/whl/lxml-4.5.1-cp36-cp36m-manylinux1_x86_64.whl -U
+RUN /root/miniconda3/bin/pip install /chineseocr/whl/pandas-1.0.5-cp36-cp36m-manylinux1_x86_64.whl -U
+RUN /root/miniconda3/bin/pip install /chineseocr/whl/opencv_python-4.0.0.21-cp36-cp36m-manylinux1_x86_64.whl -U
+RUN /root/miniconda3/bin/pip install /chineseocr/whl/opencv_contrib_python-4.0.0.21-cp36-cp36m-manylinux1_x86_64.whl -U
+RUN /root/miniconda3/bin/pip install /chineseocr/whl/tensorflow_gpu-1.9.0-cp36-cp36m-manylinux1_x86_64.whl -U
+RUN /root/miniconda3/bin/pip install /chineseocr/whl/torch-1.5.1+cpu-cp36-cp36m-linux_x86_64.whl -U
+RUN /root/miniconda3/bin/pip install /chineseocr/whl/torchvision-0.6.1+cpu-cp36-cp36m-linux_x86_64.whl -U
+RUN rm Miniconda3-latest-Linux-x86_64.sh
+RUN rm -rf whl
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
+#ENTRYPOINT ["sh", "/chineseocr/start_ocr.sh"]
 #RUN cd /chineseocr/text/detector/utils && sh make-for-cpu.sh
 #RUN conda clean -p
 #RUN conda clean -t

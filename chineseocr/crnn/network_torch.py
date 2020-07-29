@@ -158,6 +158,8 @@ class CRNN(nn.Module):
 
         image = image.view(1, 1, *image.size())
         image = Variable(image)
+        if image.size()[-1] < 8:
+            return ''
         preds = self(image)
 
         if self.ctc_decode is not None and self.ctc_mode:

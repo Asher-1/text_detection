@@ -10,10 +10,10 @@ worker_class = "gevent"
 daemon = True
 debug = True
 reload = True
-chdir = os.path.join(workpath, 'app')
+chdir = "/chineseocr"
 proc_name = 'gunicorn.proc'
 
 loglevel = 'debug'
 access_log_format = '%(t)s %(p)s %(h)s "%(r)s" %(s)s %(L)s %(b)s %(f)s" "%(a)s"'
-accesslog = os.path.join(workpath, "log/ocr_access.log")
-errorlog = os.path.join(workpath, "log/ocr_error.log")
+accesslog = os.path.join(chdir, "log/ocr_access.log")
+errorlog = os.path.join(chdir, "log/ocr_error.log")
